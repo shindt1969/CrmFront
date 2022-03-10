@@ -1,9 +1,13 @@
-<template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+<template lang="pug">
+#nav
+  router-link(to='/') Home
+  | |
+  router-link(to='/about') About
+  | |
+  router-link(to='/test') Test
+  | |
+  router-link(to='/pending') Pending
+router-view
 </template>
 
 <style>
