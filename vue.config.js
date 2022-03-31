@@ -6,6 +6,20 @@ module.exports = {
     indexPath:"index.html",
     configureWebpack: {
       devtool: 'source-map',
+  css: {
+      loaderOptions: {
+        less: {
+          lessOptions: {
+            modifyVars: {
+              'primary-color': '#1DA57A',
+              'link-color': '#1DA57A',
+              'border-radius-base': '2px',
+            },
+            javascriptEnabled: true,
+          },
+        },
+      },
+    },
       plugins: [
       ],
       devServer: {
@@ -13,7 +27,7 @@ module.exports = {
         port: 8082,
         proxy: {
             '/api':{
-                target:'http://localhost:7000/api/',
+                target:'http://localhost:8111/api/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api':''
@@ -21,6 +35,8 @@ module.exports = {
                 logLevel:'debug'
             }
         },
-      }
+      },
+
+    
     },
 }
