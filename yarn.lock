@@ -5832,15 +5832,15 @@
   "resolved" "https://registry.npmjs.org/less-bundle-promise/-/less-bundle-promise-1.0.11.tgz"
   "version" "1.0.11"
 
-"less-loader@^6.2.0":
-  "integrity" "sha512-Cl5h95/Pz/PWub/tCBgT1oNMFeH1WTD33piG80jn5jr12T4XbxZcjThwNXDQ7AG649WEynuIzO4b0+2Tn9Qolg=="
-  "resolved" "https://registry.npmjs.org/less-loader/-/less-loader-6.2.0.tgz"
-  "version" "6.2.0"
+"less-loader@^6.0.0":
+  "integrity" "sha512-k9KrSkjkdGCQwbKPHfbJT9AfRCmOCHCCjiQCc0v2fdVCRTlJvr1Si68Zk6Z4d4UyVkp0U/nEEdQeH4wV/jW8/g=="
+  "resolved" "https://registry.npmjs.org/less-loader/-/less-loader-6.0.0.tgz"
+  "version" "6.0.0"
   dependencies:
     "clone" "^2.1.2"
-    "less" "^3.11.3"
+    "less" "^3.11.1"
     "loader-utils" "^2.0.0"
-    "schema-utils" "^2.7.0"
+    "schema-utils" "^2.6.6"
 
 "less-plugin-npm-import@^2.1.0":
   "version" "2.1.0"
@@ -5848,21 +5848,7 @@
     "promise" "~7.0.1"
     "resolve" "~1.1.6"
 
-"less@^2.7.3":
-  "integrity" "sha512-KPdIJKWcEAb02TuJtaLrhue0krtRLoRoo7x6BNJIBelO00t/CCdJQUnHW5V34OnHMWzIktSalJxRO+FvytQlCQ=="
-  "resolved" "https://registry.npmjs.org/less/-/less-2.7.3.tgz"
-  "version" "2.7.3"
-  optionalDependencies:
-    "errno" "^0.1.1"
-    "graceful-fs" "^4.1.2"
-    "image-size" "~0.5.0"
-    "mime" "^1.2.11"
-    "mkdirp" "^0.5.0"
-    "promise" "^7.1.1"
-    "request" "2.81.0"
-    "source-map" "^0.5.3"
-
-"less@^3.11.3":
+"less@^3.11.1":
   "integrity" "sha512-SwA1aQXGUvp+P5XdZslUOhhLnClSLIjWvJhmd+Vgib5BFIr9lMNlQwmwUNOjXThF/A0x+MCYYPeWEfeWiLRnTw=="
   "resolved" "https://registry.npmjs.org/less/-/less-3.13.1.tgz"
   "version" "3.13.1"
@@ -5891,6 +5877,20 @@
     "promise" "^7.1.1"
     "request" "^2.83.0"
     "source-map" "~0.6.0"
+
+"less@2.7":
+  "integrity" "sha512-KPdIJKWcEAb02TuJtaLrhue0krtRLoRoo7x6BNJIBelO00t/CCdJQUnHW5V34OnHMWzIktSalJxRO+FvytQlCQ=="
+  "resolved" "https://registry.npmjs.org/less/-/less-2.7.3.tgz"
+  "version" "2.7.3"
+  optionalDependencies:
+    "errno" "^0.1.1"
+    "graceful-fs" "^4.1.2"
+    "image-size" "~0.5.0"
+    "mime" "^1.2.11"
+    "mkdirp" "^0.5.0"
+    "promise" "^7.1.1"
+    "request" "2.81.0"
+    "source-map" "^0.5.3"
 
 "levn@^0.3.0", "levn@~0.3.0":
   "integrity" "sha512-0OO4y2iOHix2W6ujICbKIaEQXvFQHue65vUG3pb5EUomzPI90z9hsA1VsO/dbIIpC53J8gxM9Q4Oho0jrCM/yA=="
@@ -8533,7 +8533,7 @@
     "ajv-errors" "^1.0.0"
     "ajv-keywords" "^3.1.0"
 
-"schema-utils@^2.0.0", "schema-utils@^2.5.0", "schema-utils@^2.6.5", "schema-utils@^2.7.0":
+"schema-utils@^2.0.0", "schema-utils@^2.5.0", "schema-utils@^2.6.5", "schema-utils@^2.6.6", "schema-utils@^2.7.0":
   "integrity" "sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg=="
   "resolved" "https://registry.npmmirror.com/schema-utils/-/schema-utils-2.7.1.tgz"
   "version" "2.7.1"

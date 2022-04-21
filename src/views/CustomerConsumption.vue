@@ -43,6 +43,8 @@ a-layout
      menu-unfold-outlined.trigger(v-if='collapsed' @click='() => (collapsed = !collapsed)' class="changeplace")
      menu-fold-outlined.trigger(v-else @click='() => (collapsed = !collapsed)' class="changeplace")
 
+
+
 a-button(type='primary') Primary Button
 a-button Default Button
 a-button(type='dashed') Dashed Button
@@ -53,6 +55,8 @@ a-button(type='link') Link Button
 <script>
 import { UserOutlined, VideoCameraOutlined, UploadOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+
+
 export default defineComponent({
   components: {
     UserOutlined,

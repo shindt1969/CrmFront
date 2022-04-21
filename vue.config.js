@@ -4,22 +4,25 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production'?'/':'/',
     assetsDir:"assets",
     indexPath:"index.html",
-    configureWebpack: {
-      devtool: 'source-map',
-  css: {
-      loaderOptions: {
-        less: {
-          lessOptions: {
-            modifyVars: {
-              'primary-color': '#1DA57A',
-              'link-color': '#1DA57A',
-              'border-radius-base': '2px',
+    css: {
+          loaderOptions: {
+            less: {
+              lessOptions: {
+                modifyVars: {
+                  'primary-color': '#1DA57A',
+                  'link-color': '#1DA57A',
+                  // 'border-radius-base': '2px',
+                  'font-size-base': '14px',
+                  'highlight-color':'#1DA57A',
+                  'error-color':'#ed3211',
+                },
+                javascriptEnabled: true,
+              },
             },
-            javascriptEnabled: true,
           },
         },
-      },
-    },
+    configureWebpack: {
+      devtool: 'source-map',
       plugins: [
       ],
       devServer: {
@@ -27,7 +30,7 @@ module.exports = {
         port: 8082,
         proxy: {
             '/api':{
-                target:'http://localhost:8111/api/',
+                target:'http://localhost:8080/api/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api':''
@@ -36,7 +39,5 @@ module.exports = {
             }
         },
       },
-
-    
     },
 }

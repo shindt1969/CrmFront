@@ -1,14 +1,14 @@
 import Antd from 'ant-design-vue/es'
-import 'ant-design-vue/dist/antd.css'
+
 const lang={
     "zh-TW":{
-      "required":"`<h1>`此欄位必填",
+      "required":"此欄位必填",
       "email":"電子郵件格式不正確",
       "phone":"電話格式不正確",
       "number":"必須為數字",
       "password":"密碼必須包含大、小寫、數字，且長度為8-12",
       "passwordCheck":"確認密碼不符",
-      "num_en":"只能輸入英文和數字",
+      "num_en":"只能輸入英文、數字",
       "visited":"只能中文",
       "numBetween":(a,b)=>{ return `數值必須介於 ${a} 和 ${b}之間`;},
       "numMax":(v)=>{ return '數值必須小於 '+v;},
@@ -99,16 +99,14 @@ const lang={
     return{
       // required:v =>(!!v) ||v===0|| msg["required"],
       mobiles:"55",
-      username:[{required: true,message: msg["required"],trigger:"blur"},
-                {max:2},{min:8,max:12,message: '長度為8-12'}],
-      mobile:[{pattern:/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/,message: msg["phone"]}],
+      username:[{required: true,message: msg["required"],trigger:"blur"}],
+      mobile:[{pattern:/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/,message: msg["phone"]+"內容不可小於2"}],
       // mobileage:[{required: true,message: "required"},
       // {validator: validateNewPassword2,trigger: "change"}],
       emails:[{ pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,message:  msg["email"]}],
-      habit:[{pattern: /^[A-Za-z]*[A-Za-z0-9]*[0-9]*$/,message: msg["num_en"]}],
+      habit:[{pattern: /^[A-Za-z]*(?=[\s\S]{1,2}$)[A-Za-z0-9]*[0-9]*$/,message: msg["num_en"]+"且長度不能大於2"}],
       visited:[{pattern:/^[\u4e00-\u9fa5]+$/,message: msg["visited"]}],
-      password:[{min:8,max:12,message: '長度為8-12'},
-          {min:8,max:12,pattern:/\d/&&/[a-z]/&& /[A-Z]/,message: '密碼必須包含大、小寫、數字'}],
+      password:[{required: true,message: msg["required"],trigger:"blur"}],
 
     //   required:(v) =>{  return typeof(v)!="string"&&Array.isArray(v)?(v.length!=0):(!!v) ||v===0|| msg["required"]},
     //   email: v =>  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || !v || msg["email"],

@@ -49,7 +49,20 @@ const routes = [
     name: "Report",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Report.vue")
-  }
+  },
+  {
+    path: "/notes",
+    name: "Notes",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Notes.vue")
+  },
+  {
+    path: '/itemnotes/:id',
+    name: "ItemNotes",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ItemNotes.vue")
+    
+  },
 ];
 
 const router = createRouter({

@@ -9,6 +9,8 @@ a-layout
          router-link(to='/customerConsumption') 消費
         a-menu-item(key='3') 
          router-link(to='/report') 報表
+        a-menu-item(key='4') 
+         router-link(to='/notes') 記事
       a-space(direction='vertical' class="mock")
         a-input-search(v-model:value='value' size="small" placeholder='input search text' enter-button @search='onSearch' class="mock-block")
       a-layout

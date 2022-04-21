@@ -24,7 +24,6 @@ a-form.ant-advanced-search-form(ref='formRef' name='advanced_search' :model='for
             template(v-else)
               DownOutlined /
               |更多搜尋
-
 a-table(:columns='columns' :data-source='data' class="tablelist")
     template(#headercell='{ column }')
       template(v-if="column.key === 'name'")
@@ -32,8 +31,8 @@ a-table(:columns='columns' :data-source='data' class="tablelist")
           smile-outlined /
           |Name
     template(#bodycell='{ column, record }')
-     template(v-if="column.key === 'name'")
-        a {{ record.name }}
+     template(v-if="column.key === 'name'" )
+        a {{ column.name }}
      template(v-else-if="column.key === 'tags'")
         span
         a-tag( v-for="tag in record.tags"
@@ -52,10 +51,10 @@ a-table(:columns='columns' :data-source='data' class="tablelist")
 </template>
 
 <script>
-import { defineComponent, reactive,ref,SmileOutlined } from "vue";
+import { defineComponent, reactive,ref } from "vue";
 import {mapActions,mapMutations,useStore} from 'vuex'
 import { useRoute,useRouter } from 'vue-router'
-import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
+import { DownOutlined, UpOutlined,SmileOutlined } from '@ant-design/icons-vue';
 import { useGetters } from "../useGetters"
 import BarTemplate from "./BarTemplate.vue"
 // import { validateNewPassword2 } from "../validationsBack"
@@ -82,13 +81,13 @@ const columns = [{
 }];
 const data = [{
   key: '1',
-  name: 'John Brown',
+  name: 'John Browna',
   age: 32,
   address: 'New York No. 1 Lake Park',
   tags: ['nice', 'developer'],
 }, {
   key: '2',
-  name: 'Jim Green',
+  name: 'Jim Greens',
   age: 42,
   address: 'London No. 1 Lake Park',
   tags: ['loser'],
@@ -108,7 +107,6 @@ export default defineComponent({
       UpOutlined,
       SmileOutlined
          },
-
    setup() {
     const store = useStore();  
     const router = useRouter(); 
@@ -120,10 +118,8 @@ export default defineComponent({
       mobile:'',
       mobileage:'',
     });
-
     const expand = ref(false);
     const formRef = ref();
-
     return {formState,expand,formRef,data,columns};
   },
 
@@ -131,7 +127,6 @@ export default defineComponent({
 </script>
 
 <style>
-
 .CustomerName{
  position:absolute;
  top:10px;
