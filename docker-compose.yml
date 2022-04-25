@@ -25,11 +25,12 @@ services:
       - DB_USER=$MYSQLDB_USER
       - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - DB_NAME=$MYSQLDB_DATABASE
-      - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - DB_PORT=$MYSQLDB_LOCAL_PORT
     stdin_open: true
     tty: true
     volumes:
      - C:\Users\DT01\crmv2\backend:/backend
 
+# 設定PORT ，要設定外部
 volumes: 
   db:
