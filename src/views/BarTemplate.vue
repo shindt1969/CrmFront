@@ -39,7 +39,7 @@ a-layout
                span
                  notification-outlined /
                  | (其它類別)
-              a-menu-item(key='9') option9
+              a-menu-item(key='9')  option9
               a-menu-item(key='10') option10
               a-menu-item(key='11') option11
               a-menu-item(key='12') option12

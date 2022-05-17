@@ -10,6 +10,16 @@ var connection = mysql.createConnection({
   database: 'bezkoder_db'  
 }); 
 
+// var connection = mysql.createConnection({     
+//   host     : 'localhost',       
+//   user     : 'root',              
+//   password : '123456',       
+//   port: '3307',                   
+//   database: 'bezkoder_db'  
+// });
+// 可以直接選擇資料庫名稱
+
+
 connection.connect();
 
 const app = express();
@@ -59,11 +69,12 @@ app.post('/api/auth/login',function(req,res){
       res.send(false);
     }
 });
+
+
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
 
 
 
