@@ -58,21 +58,16 @@ export default defineComponent({
       }}
       
     const doLogin =(formState) =>{
-        const getlist = store.state.Member.douserlist.payLoad
-        console.log("username",store.state.validations.username)
-
-        console.log("getlist",getlist)
+        // const getlist = store.state.Member.douserlist.payLoad
+        // console.log("username",store.state.validations.username)
+        // console.log("getlist",getlist)
         // const mystate = store.state.validations.email("happyk530i@yahoo.com.tw")
-
         // console.log("mystate",mystate)
-    if (formState.username != getlist.account && formState.password !=getlist.password){
-        alert('Not a member')
-    }else{
          store.dispatch('http/post',{
           api:"auth/login",
           json:formState})
             .then((data)=>{
-             console.log('logindata',data)
+             console.log('logindata',data.token)
              if(data){
              store.commit('Member/loginRequest',data)
              store.commit('Member/loginSuccess')
@@ -80,7 +75,7 @@ export default defineComponent({
              }else{
               alert('請先加入會員');
                } })
-                }}
+                }
     const onFinish = values => {
       const getlist = store.state.Member.age
       console.log('getlist', getlist)

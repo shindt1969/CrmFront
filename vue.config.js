@@ -33,7 +33,6 @@ module.exports = {
                 target:'http://localhost:6868/api/',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api':''
                 },
                 logLevel:'debug'
             }

@@ -24,11 +24,11 @@ const getters = {
   }
   const getHttpConfig=({rootState})=>{
     return {
-      // headers: {
-      //   id_token:rootState.user.uid,
-      //   authorization :`Bearer ${rootState.user.utkn}`,
-      //   accept: 'application/json'
-      // }
+      headers: {
+        // id_token:rootState.user.uid,   
+      authorization :`Bearer ${rootState.Member.user.token}`,
+      accept: 'application/json'
+      }
     };
   }
   const errorHandle=(commit,error)=>{
@@ -67,7 +67,7 @@ const getters = {
     post ({ dispatch,commit, state,rootState },{api,json}) {
         return new Promise((resolve, reject) => {
           beforeApiCall('post',api);
-          console.log(111,$http.defaults)
+          console.log(111,getHttpConfig({rootState}))
           $http.post(api,json,getHttpConfig({rootState}))
           .then( ({data}) =>{
             // console.log('331',data)
@@ -81,6 +81,18 @@ const getters = {
     put ({ dispatch,commit, state,rootState },{api,json}) {
         return new Promise((resolve, reject) => {
           beforeApiCall('put',api);
+          $http.put(api,json,getHttpConfig({rootState}))
+          .then( ({data}) =>{
+            resolve(data);
+          })
+          .catch( (error)=> {
+            resolve(errorHandle(commit,error.response));
+          });
+        });
+      },
+    get ({ dispatch,commit, state,rootState },{api,json}) {
+        return new Promise((resolve, reject) => {
+          beforeApiCall('get',api);
           $http.put(api,json,getHttpConfig({rootState}))
           .then( ({data}) =>{
             resolve(data);

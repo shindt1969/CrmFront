@@ -1,14 +1,5 @@
 <template lang="pug">
 #nav
-  router-link(to='/') 聯繫
-  | |
-  router-link(to='/about') 關於
-  | |
-  router-link(to='/pending') 填表
-  | |
-  router-link(to='/login') login
-  | |
-  h4(class="movePlace") {{$store.state.Member.douserlist.payLoad.username}} 個人專區
 router-view
 </template>
 

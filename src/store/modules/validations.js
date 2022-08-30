@@ -120,17 +120,11 @@ const lang={
   };
   const state = initState();
 
-  const mutations ={
-    setAntMobile(state,payLoad){
-        state.mobiles = payLoad
-      return   console.log("111",payLoad)
-     }
-  }
- 
+  
+
   
   export default {
     namespaced: true,
     state,
     getters,
-    mutations
   }

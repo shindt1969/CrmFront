@@ -22,6 +22,7 @@ services:
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
        # 6868:8080
+    command: "nodemon -L server.js"
     environment:
       - DB_HOST=mysqldb
       - DB_USER=$MYSQLDB_USER

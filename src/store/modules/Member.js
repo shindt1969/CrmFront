@@ -9,9 +9,7 @@ export default {
                counter2: 1250,
              },
                 douserlist:[{account:"",password:""}],
-                
                 setAntMobile:"",
-
            },
       mutations: {
             resetState (state) {
@@ -22,9 +20,9 @@ export default {
             }, 
             loginRequest(state,payLoad){   //回覆更改state
               state.user.isLogin=true;
-              state.user.token=null;
+              state.user.token=payLoad.token;
               state.user.account=payLoad.account;
-              console.log('qqqq',state.user.isLogin,'登入成功',payLoad)
+              console.log('qqqq',state.user.token,state.user.isLogin,'登入成功',payLoad)
             },
             doregister(state,payLoad){
               state.douserlist = {...state.douserlist,payLoad}
@@ -65,7 +63,10 @@ export default {
       getters: { 
             status(state) {
                 return  state.user.isLogin
-            } 
+            },
+            nameInfo(state) {
+              return state.user.account
+           }
            }
         } 
   
