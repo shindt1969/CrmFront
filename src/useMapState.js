@@ -21,32 +21,6 @@ export function useMapState(mapper) {
 
 
 
-// export default {
-//     setup() {
-//        const store = useStore();
-  
-//       //  const ifLoading = computed( ()=> store.state.isLoading  )    第一種寫法，寫在SETUP裡面
-//       //  const clicked = computed(()=>store.state.clickedTimes) 
-       
-      
-  
-//       //  const storeStateFns = mapState(['isLoading','clickedTimes'])  第二種寫法，寫在SETUP裡面
-//       //  console.log(storeStateFns)
-//       //  const storeState = {}
-//       //  Object.keys(storeStateFns).forEach(fnKey => {
-  
-//       //     const fn = storeStateFns[fnKey].bind({ $store: store })
-//       //     storeState[fnKey] = computed(fn)
-//       //      })
-//       //  console.log(storeState.clickedTimes.value)
-  
-      
-//        const reverseLoad = () =>{ store.commit("Loaded")}
-//        const addTimes= () =>{ store.commit("addTimes")}
-  
-//       return{reverseLoad,addTimes,...storeState}
-//     }}
-//   </script>
 
 
 

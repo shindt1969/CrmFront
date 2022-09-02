@@ -1,47 +1,34 @@
 <template  lang="pug" >
-a-layout(style='min-height: 100vh')
-    a-layout-sider(v-model:collapsed='collapsed' collapsible)
+
+a-layout-sider(v-model:collapsed='collapsed' collapsible class="lay-container")
       .logo
       a-menu(v-model:selectedkeys='selectedKeys' theme='dark' mode='inline')
         
 
-        a-menu-item(:key='item.path' :index='item.path' v-for='item in noChildren()')
+        a-menu-item(:key='item.path' @click="clickMenu(item)" :index='item.path' v-for='item in noChildren()')
           component.icons(:is='item.icon')
           span {{item.label}}
      
-        
-
-        a-sub-menu(:index='item.label' :key='item.path' v-for='item in hasChildren()')
+        a-sub-menu(:index='item.label'  :key='item.path' v-for='item in hasChildren()')
          template(#title)
              span
              component.icons(:is='item.icon')
              span {{item.label}}
         
-
-         a-menu-item(:index='subItem.path' :key='subIndex' v-for='(subItem,subIndex) in item.children')
+         a-menu-item(:index='subItem.path' @click="clickMenu(subItem)" :key='subIndex' v-for='(subItem,subIndex) in item.children')
            component.icons(:is='subItem.icon')
            span {{subItem.label}}
           
-    
-
-
          a-menu-item(key='9')
           file-outlined
           span File 
-    
 </template>
-
-
-
-
-
-
-
 
 
 <script>
 import { PieChartOutlined, UserOutlined,DesktopOutlined, HomeOutlined,FileOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import {useRouter} from 'vue-router'
 export default defineComponent({
   components: {
     PieChartOutlined,
@@ -54,6 +41,7 @@ setup () {
     
       const  collapsed = ref(true)
       const  selectedKeys = ref(['/user'])
+      const  router = useRouter();
       const  list =[
           {
             path: "/home",
@@ -105,10 +93,15 @@ setup () {
       const hasChildren = () =>{
         return list.filter((item) => item.children );
       };
+      
+      const clickMenu = (item) => {
+            router.push({
+                name: item.name,
+            })
+      };
 
 
-
-       return { collapsed,selectedKeys,noChildren,hasChildren} 
+      return { collapsed,selectedKeys,noChildren,hasChildren,clickMenu} 
   }
 });
 </script>
@@ -124,6 +117,9 @@ setup () {
 }
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
+}
+.r-container{
+    flex-wrap: wrap;
 }
 </style>
 

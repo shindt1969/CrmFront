@@ -1,5 +1,5 @@
 <template lang="pug">
-div home的內容
+div 我是User的組件
 
     
     

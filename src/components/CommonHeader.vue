@@ -1,7 +1,7 @@
 <template lang="pug" >
 
-a-layout
- a-layout-header(style='background: #fff; padding: 0')
+
+a-layout-header(style='background: #fff; padding: 0')
   .r-content
    a-dropdown
         a.ant-dropdown-link(@click.prevent)
@@ -24,8 +24,6 @@ export default defineComponent({
     // DownOutlined,
   },
   setup(){
-
-
         const imgSrc = require("../assets/images/puffin.jpg")
         return{
             imgSrc,

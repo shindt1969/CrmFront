@@ -1,24 +1,43 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "../views/home/Home.vue";
 
 const routes = [
   {
     path: "/",
     component: () => import('../views/Main.vue'),
+    redirect:'/home',
     children: [
       {
-        path:"/",
-        name:'Home',
+        path:"/home",
+        name:'home',
         component: Home
-      }
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: () => import("../views/user/User.vue")
+
+      },
+      {
+        path: '/page1',
+        name: 'page1',
+        component: () => import("../views/Page1.vue")
+
+      },
+      {
+        path: '/page2',
+        name: 'page2',
+        component: () => import("../views/Page2.vue")
+
+      },
+
+
     ]
   },
   {
     path: '/BarTemplate',
     name: 'BarTemplate',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+ 
     component: () => import('../views/BarTemplate.vue'),
   },
   {
