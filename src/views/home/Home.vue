@@ -21,19 +21,14 @@ a-row(:gutter='[40,16]')
 
   a-col(:span='16' style="margin-top:20px" height="450px")
      a-card
-       <a-table v-for=""></a-table>
+      //-  <a-table v-for=""></a-table>
       
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
-  },
   setup(){
     const tableData =[
 
