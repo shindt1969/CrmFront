@@ -7,14 +7,6 @@ a-layout(style='min-height: 100vh')
        a-layout-content
         router-view
        a-layout-footer Footer
-          
-
-//-    a-layout
-//-        <a-layout-header style="background: #fff; padding: 0" />
-   
-//-    a-layout   
-//-     a-layout-header(class="r-container")
-//-         common-header 
    
      
 </template>
