@@ -5,66 +5,30 @@ a-row(:gutter='[40,16]')
   a-col(:span='16' style="margin-top:50px")
      a-card
       Note
-      a-table(:columns='columns' :data-source='data' bordered)
-       template(#bodycell='{ column, text }')
-         template(v-if='column.dataIndex === "name"')
-            a {{ text }}
+      Dolist
       
 </template>
 
 <script>
 // @ is an alias to /src
-import Note from './Note.vue'
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Cash Assets',
-    className: 'column-money',
-    dataIndex: 'money',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-  },
-];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    money: '￥300,000.00',
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    money: '￥1,256,000.00',
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    money: '￥120,000.00',
-    address: 'Sidney No. 1 Lake Park',
-  },
-];
+import { defineComponent } from 'vue';
+import  Dolist from "../Dolist.vue";
+import  Note from "./Note.vue";
 
-export default {
+
+export default  defineComponent( {
   name: "Home",
+
   components: {
-    Note
+     Dolist,
+     Note
   },
   setup(){
 
-    return{
-      columns,
-      data
-    };
+    return{   };
   }
-};
+});
 </script>
 
 <style lang="less" scoped>
