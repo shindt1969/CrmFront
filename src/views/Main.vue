@@ -16,7 +16,6 @@ a-layout(style='min-height: 100vh')
 //-     a-layout-header(class="r-container")
 //-         common-header 
    
-     
 </template>
 
 <script>

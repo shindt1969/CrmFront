@@ -12,7 +12,6 @@ a-layout-header(style='background: #fff; padding: 0')
                a(href='javascript:;') 個人中心
              a-menu-item
                a(href='javascript:;') 登出 
-
 </template>
 
 
