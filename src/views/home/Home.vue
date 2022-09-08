@@ -1,14 +1,14 @@
 <template lang="pug">
 
-Note
 a-row(:gutter='[40,16]')
-  a-col(:span='16' style="margin-top:400px" height="450px")
+
+  a-col(:span='16' style="margin-top:50px")
      a-card
+      Note
       a-table(:columns='columns' :data-source='data' bordered)
        template(#bodycell='{ column, text }')
          template(v-if='column.dataIndex === "name"')
             a {{ text }}
-      
       
 </template>
 
