@@ -9,24 +9,27 @@ div(:span='18' style="margin:10px 20px;")
           a-textarea(v-model:value='value' placeholder='請輸入記事內容' :rows='4')
         a-tab-pane(key='3' tab='公司記事')
           a-textarea(v-model:value='value' placeholder='請輸入記事內容' :rows='4')
-      div(style="background-color: #E0F1FF; height: 40px;")
-        a-button(type='primary' shape='circle')
+      div(style="background-color: #F0F1FF; height: 40px;")
+        a-button(shape='circle' style="margin: 3px;background-color: #F0F1FF")
           template(#icon)
-            HistoryOutlined
+            ClockCircleOutlined
+        a-button(style="margin: 3px;background-color: #F0F1FF") 記事範本
+          DownOutlined
 
-        a-button(type="primary" style='margin-right: 10px;  float: right;') 存檔
-        a-button(style='margin-right: 10px;  float: right;') 取消
+        a-button(type="primary" style='margin: 3px;  float: right;') 存檔
+        a-button(style='margin: 3px;  float: right;') 取消
       div(style='margin-right: 10px;  float: right;')
 
 
 </template>
     
 <script>
-import { HistoryOutlined } from '@ant-design/icons-vue';
+import { ClockCircleOutlined, DownOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   components: {
-    HistoryOutlined
+    ClockCircleOutlined,
+    DownOutlined
   },
   setup() {
     const value = ref('');
