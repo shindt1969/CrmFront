@@ -92,6 +92,15 @@ app.post('/api/auth/login',function(req,res){
   });
 });
 
+app.post('/api/auth/getdata',function(req,res){
+  var  addSql = 'SELECT * FROM NewtestTable';
+  var  addSqlParams = [username, password];
+
+
+});
+
+
+
 
 app.post('/api/auth/getinfro',function(req,res){
   const bearerHeader = req.headers.authorization;

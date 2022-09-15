@@ -5,7 +5,9 @@ a-row(:gutter='[40,16]')
   a-col(:span='16' style="margin-top:50px")
      a-card
       Note
-      Dolist
+  
+      Dolist3
+      //- (:props1="" )
       
 </template>
 
@@ -13,7 +15,7 @@ a-row(:gutter='[40,16]')
 // @ is an alias to /src
 
 import { defineComponent } from 'vue';
-import  Dolist from "../Dolist.vue";
+import  Dolist3 from "../Dolist3.vue";
 import  Note from "./Note.vue";
 
 
@@ -21,7 +23,7 @@ export default  defineComponent( {
   name: "Home",
 
   components: {
-     Dolist,
+     Dolist3,
      Note
   },
   setup(){

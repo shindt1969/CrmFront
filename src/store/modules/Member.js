@@ -9,6 +9,7 @@ export default {
                counter2: 1250,
              },
                 douserlist:[{account:"",password:""}],
+                Notelist:[{Notekey:"",Username:"",Notetxt:""}],
                 setAntMobile:"",
            },
       mutations: {
@@ -27,6 +28,11 @@ export default {
             doregister(state,payLoad){
               state.douserlist = {...state.douserlist,payLoad}
                console.log("state.douserlist",state.douserlist)
+            },
+            changeNote(state,payLoad){
+              state.Notelist = {...state.Notelist,payLoad}
+              console.log("state.Notelist",state.Notelist)
+
             },
             loginSuccess(state) {      //登入成功後再做...
               state.user.isLogin=true;

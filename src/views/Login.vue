@@ -58,11 +58,7 @@ export default defineComponent({
       }}
       
     const doLogin =(formState) =>{
-        // const getlist = store.state.Member.douserlist.payLoad
-        // console.log("username",store.state.validations.username)
-        // console.log("getlist",getlist)
-        // const mystate = store.state.validations.email("happyk530i@yahoo.com.tw")
-        // console.log("mystate",mystate)
+   
          store.dispatch('http/post',{
           api:"auth/login",
           json:formState})
