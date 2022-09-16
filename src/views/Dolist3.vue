@@ -19,7 +19,7 @@ v-for='(fakedata,index) in data'   v-show='fakedata.show' :class='[fakedata.clas
 
 
 
-<script>
+<script >
 import { defineComponent,ref,onMounted} from 'vue';
 import {mapActions,mapMutations,useStore} from 'vuex';
 // import { DownOutlined } from '@ant-design/icons-vue';
@@ -40,7 +40,7 @@ export default defineComponent({
         const getnote =()=>{
           console.log('tts')
           store.dispatch('http/get',{
-                api:"admin/contents/1/5"})
+                api:"/api/admin/contents/1/5"})
         .then((data)=>{
                 console.log('tt',data)
                 if(data.status){
@@ -54,9 +54,6 @@ export default defineComponent({
         //     console.log('myheader mounted');
         //   })
 
-
-
-        
         // getnote();
         
         return{

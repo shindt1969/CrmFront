@@ -3,6 +3,7 @@ import router from '@/router'
 
 axios.defaults.timeout= 60000;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+// VUE_APP_API_URL=/api/
 
 const $http=axios;
 
