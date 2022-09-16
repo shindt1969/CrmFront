@@ -7,7 +7,7 @@ v-for='(fakedata,index) in data'   v-show='fakedata.show' :class='[fakedata.clas
   a-row
         a-col(:span='8')
          .r-content
-           img.user(:src='imgSrc' alt) 
+           img.user(:src='imgSrc' alt)
            | col-8
   a-row
         a-col(:span='6' :offset='6')
@@ -50,19 +50,17 @@ export default defineComponent({
                 }
         })};
 
-        // onMounted(() => {
-        //     console.log('myheader mounted');
-        //   })
+        onMounted(() => {
+            console.log('myheader mounted');
+            getnote();
+          })
 
         // getnote();
         
         return{
-            imgSrc,getnote,data
+            imgSrc,data
         };
-       },
-      mounted() {
-       this.getnote()
-      }
+       }
 
 
 

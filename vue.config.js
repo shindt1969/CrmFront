@@ -21,6 +21,7 @@ module.exports = {
             },
           },
         },
+
     configureWebpack: {
       devtool: 'source-map',
       plugins: [
@@ -32,9 +33,9 @@ module.exports = {
             '/api':{
                 target:'http://localhost.test',
                 changeOrigin: true,
-                pathRewrite: {
-                  '^/api':''
-                },
+                // pathRewrite: {
+                //   '^/api': ''
+                // },
                 logLevel:'debug'
             }
         },

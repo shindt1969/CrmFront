@@ -21,7 +21,7 @@ const getters = {
     }
   }
   const beforeApiCall=(method,api)=>{
-    // consoleLog("is caling...",method,api);
+    consoleLog("is caling...",method,api);
   }
   const getHttpConfig=({rootState})=>{
     return {
