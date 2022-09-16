@@ -21,6 +21,7 @@ module.exports = {
             },
           },
         },
+
     configureWebpack: {
       devtool: 'source-map',
       plugins: [
@@ -30,10 +31,11 @@ module.exports = {
         port: 8082,
         proxy: {
             '/api':{
-                target:'http://localhost/admin/contents/1/10',
+                target:'http://localhost',
                 changeOrigin: true,
-                pathRewrite: {
-                },
+                // pathRewrite: {
+                //   '^/api': ''
+                // },
                 logLevel:'debug'
             }
         },

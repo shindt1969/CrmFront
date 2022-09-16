@@ -20,7 +20,7 @@ v-for='(fakedata,index) in data'   v-show='fakedata.show' :class='[fakedata.clas
 
 
 <script>
-import { defineComponent,ref} from 'vue';
+import { defineComponent,ref,onMounted} from 'vue';
 import {mapActions,mapMutations,useStore} from 'vuex';
 // import { DownOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
@@ -31,35 +31,42 @@ export default defineComponent({
         const imgSrc = require("../assets/images/puffin.jpg")
         const store = useStore();
 
-        const data = ref()
+        const data = ref([
+            { name: '王美美', content: '來自台北，入住多天', show: true, class: 'red' }, 
+            { name: '陳童', content: '來自紐約，只入住一天', show: true, class: 'red' },
+            ]) 
+
+
+        const getnote =()=>{
+          console.log('tts')
+          store.dispatch('http/get',{
+                api:"admin/contents/1/5"})
+        .then((data)=>{
+                console.log('tt',data)
+                if(data.status){
+                  this.data   = data.message                      
+                }else{
+                    alert('NO-REGISTER');
+                }
+        })};
+
+        onMounted(() => {
+            console.log('myheader mounted');
+            getnote();
+          })
+
+
+
         
-        const getnote =()=> store.dispatch('http/get',{
-           api:"auth/getdata"})
-       .then((data)=>{
-           console.log('tt',data)
-           if(data.status){
-             this.data   = data.message                      
-           }else{
-               alert('NO-REGISTER');
-           }
-           });
-
-
-
-        // const fakedata = ref([
-        //     { name: '王美美', content: '來自台北，入住多天', show: true, class: 'red' }, 
-        //     { name: '陳童', content: '來自紐約，只入住一天', show: true, class: 'red' },
-        //     ]) 
-
-
-
+        // getnote();
+        
         return{
-            imgSrc,fakedata,getnote
+            imgSrc,data
         };
-      },
-        onMounted() {
-    this.getnote()
-  }
+       }
+
+
+
 });
 </script>
 
