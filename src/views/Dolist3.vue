@@ -3,11 +3,11 @@
 
 
 a-col(:span='16' style="margin-top:50px" 
-v-for='(fakedata,index) in fakedata'   v-show='fakedata.show' :class='[fakedata.class]')   
+v-for='(fakedata,index) in data'   v-show='fakedata.show' :class='[fakedata.class]')   
   a-row
         a-col(:span='8')
          .r-content
-           img.user(:src='imgSrc' alt) 
+           img.user(:src='imgSrc' alt)
            | col-8
   a-row
         a-col(:span='6' :offset='6')
@@ -21,6 +21,7 @@ v-for='(fakedata,index) in fakedata'   v-show='fakedata.show' :class='[fakedata.
 
 <script>
 import { defineComponent,ref} from 'vue';
+import {mapActions,mapMutations,useStore} from 'vuex';
 // import { DownOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
   components: {
@@ -28,18 +29,37 @@ export default defineComponent({
   },
   setup(){
         const imgSrc = require("../assets/images/puffin.jpg")
+        const store = useStore();
 
-        const fakedata = ref([
-            { name: '王美美', content: '來自台北，入住多天', show: true, class: 'red' }, 
-            { name: '陳童', content: '來自紐約，只入住一天', show: true, class: 'red' },
-            ]) 
+        const data = ref()
+        
+        const getnote =()=> store.dispatch('http/get',{
+           api:"auth/getdata"})
+       .then((data)=>{
+           console.log('tt',data)
+           if(data.status){
+             this.data   = data.message                      
+           }else{
+               alert('NO-REGISTER');
+           }
+           });
+
+
+
+        // const fakedata = ref([
+        //     { name: '王美美', content: '來自台北，入住多天', show: true, class: 'red' }, 
+        //     { name: '陳童', content: '來自紐約，只入住一天', show: true, class: 'red' },
+        //     ]) 
 
 
 
         return{
-            imgSrc,fakedata
-        }
-    }
+            imgSrc,fakedata,getnote
+        };
+      },
+        onMounted() {
+    this.getnote()
+  }
 });
 </script>
 

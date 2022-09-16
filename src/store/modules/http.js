@@ -93,7 +93,7 @@ const getters = {
     get ({ dispatch,commit, state,rootState },{api,json}) {
         return new Promise((resolve, reject) => {
           beforeApiCall('get',api);
-          $http.put(api,json,getHttpConfig({rootState}))
+          $http.get(api,json,getHttpConfig({rootState}))
           .then( ({data}) =>{
             resolve(data);
           })
