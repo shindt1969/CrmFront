@@ -42,9 +42,8 @@ export default defineComponent({
           store.dispatch('http/get',{
                 api:"/api/admin/contents/1/5"})
         .then((data)=>{
-                console.log('tt',data)
                 if(data.status){
-                  this.data   = data.message                      
+                  this.data   = data.message                   
                 }else{
                     alert('NO-REGISTER');
                 }

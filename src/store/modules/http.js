@@ -68,10 +68,9 @@ const getters = {
     post ({ dispatch,commit, state,rootState },{api,json}) {
         return new Promise((resolve, reject) => {
           beforeApiCall('post',api);
-          console.log(111,getHttpConfig({rootState}))
           $http.post(api,json,getHttpConfig({rootState}))
           .then( ({data}) =>{
-            // console.log('331',data)
+            console.log(data)
             resolve(data);
           })
           .catch( (error)=> {
