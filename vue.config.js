@@ -31,11 +31,11 @@ module.exports = {
         port: 8082,
         proxy: {
             '/api':{
-                target:'http://localhost.test',
+                target:'http://localhost',
                 changeOrigin: true,
-                // pathRewrite: {
-                //   '^/api': ''
-                // },
+                pathRewrite: {
+                  '^/api': ''
+                },
                 logLevel:'debug'
             }
         },
