@@ -18,7 +18,7 @@ import {mapActions,mapMutations,useStore} from 'vuex';
 export default defineComponent({
   setup() {
     const store = useStore();
-    const data =ref();
+    const data =ref('');
     const filteredInfo = ref();
     const sortedInfo = ref();
     const getnote =()=> store.dispatch('http/get',{
