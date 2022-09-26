@@ -6,25 +6,25 @@ import validations from "./modules/validations";
 import createPersistedState from "vuex-persistedstate"
 
 export default createStore({
-  strict: process.env.NODE_ENV !== 'production',
-  plugins: [createPersistedState({key:'keepper',paths:['Member.user','Member.douserlist']})],
-  
-  
-  modules: {
-    http:http,
-    Member:Member,
-    validations:validations
-  },
-  state: {
-    age:17,
-  },
-  getters:{
+    strict: process.env.NODE_ENV !== 'production',
+    plugins: [createPersistedState({ key: 'keepper', paths: ['Member.user', 'Member.douserlist'] })],
 
-    ageInfo(state) {
-      return state.age
-    }
-  },
-  mutations: {
-  },
-  actions: {},
+
+    modules: {
+        http: http,
+        Member: Member,
+        validations: validations
+    },
+    state: {
+        age: 17,
+    },
+    getters: {
+
+        ageInfo(state) {
+            return state.age
+        }
+    },
+    mutations: {
+    },
+    actions: {},
 });

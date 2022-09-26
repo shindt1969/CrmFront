@@ -94,7 +94,6 @@ const lang={
   }
 
 
-
   const initState=function(){
     return{
       // required:v =>(!!v) ||v===0|| msg["required"],
@@ -103,7 +102,7 @@ const lang={
       mobile:[{pattern:/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/,message: msg["phone"]+"內容不可小於2"}],
       // mobileage:[{required: true,message: "required"},
       // {validator: validateNewPassword2,trigger: "change"}],
-      emails:[{ pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,message:  msg["email"]}],
+      emails:[{ pattern: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/,message:  msg["email"]}],
       habit:[{pattern: /^[A-Za-z]*(?=[\s\S]{1,2}$)[A-Za-z0-9]*[0-9]*$/,message: msg["num_en"]+"且長度不能大於2"}],
       visited:[{pattern:/^[\u4e00-\u9fa5]+$/,message: msg["visited"]}],
       password:[{required: true,message: msg["required"],trigger:"blur"}],
@@ -120,9 +119,6 @@ const lang={
   };
   const state = initState();
 
-  
-
-  
   export default {
     namespaced: true,
     state,
