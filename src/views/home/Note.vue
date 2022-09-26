@@ -53,7 +53,7 @@ export default defineComponent({
             })
                 .then((data) => {
                     if (data.status) {
-                        console.log(data.)
+                        // console.log(data.body)
                     } else {
                         // alert('NO-REGISTER');
                     }

@@ -34,7 +34,7 @@ const getters = {
   }
   const errorHandle=(commit,error)=>{
     consoleLog("api error",error);
-    error.status = parseInt(error.status);
+    // error.status = parseInt(error.status);
     if(error.status == 401){
       if(error.data.code == 7){
         consoleLog("verify needed");
@@ -95,6 +95,7 @@ const getters = {
           beforeApiCall('get',api);
           $http.get(api,json,getHttpConfig({rootState}))
           .then( ({data}) =>{
+            console.log("hhh",data)
             resolve(data);
           })
           .catch( (error)=> {

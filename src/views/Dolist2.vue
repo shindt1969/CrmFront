@@ -22,11 +22,11 @@ export default defineComponent({
     const filteredInfo = ref();
     const sortedInfo = ref();
     const getnote =()=> store.dispatch('http/get',{
-        api:"auth/getdata"})
+        api:"/admin/contents/1"})
     .then((data)=>{
-        console.log('tt',data)
+        console.log('tt',data.value)
         if(data.status){
-          this.data   = data.message                      
+          this.data.value   = data.message                      
         }else{
             alert('NO-REGISTER');
         }
