@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/home/Home.vue";
-
+// import { useStore } from 'vuex'
+import store from '@/store/index';
 
 const routes = [
   {
     path: "/",
     component: () => import('../views/Main.vue'),
-    redirect:'/home',
+    redirect:'/login',
     children: [
       {
         path:"/home",
@@ -95,5 +96,17 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach((to, from) => {
+    // const store = useStore();
+    console.log('route: ', to)
+
+    if (to.path === '/login' &&  store.state.Member.user.isLogin)
+        return { name: 'home'}
+
+    if (!store.state.Member.user.isLogin)
+        return { name: 'login' }
+
+})
 
 export default router;
