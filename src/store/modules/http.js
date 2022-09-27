@@ -78,7 +78,7 @@ const actions = {
     },
     put({ dispatch, commit, state, rootState }, { api, json }) {
         return new Promise((resolve, reject) => {
-            beforeApiCall('put', api);
+            beforeApiCall('put', api, json);
             $http.put(api, json, getHttpConfig({ rootState }))
                 .then(({ data }) => {
                     resolve(data);
@@ -90,7 +90,7 @@ const actions = {
     },
     get({ dispatch, commit, state, rootState }, { api, json }) {
         return new Promise((resolve, reject) => {
-            beforeApiCall('get', api);
+            beforeApiCall('get', api, json);
             $http.get(api, json, getHttpConfig({ rootState }))
                 .then(({ data }) => {
                     resolve(data);

@@ -5,14 +5,14 @@ a-list(item-layout="horizontal", :data-source="datas")
      template(#actions)
        a(key='list-loadmore-edit') edit
        a(key='list-loadmore-more') more
+     div(style='margin: 1px; width : 1px; font-size:2px; margin-top: 80px; margin-right:1px;  ') {{item.created_at}}  
 
      a-skeleton(avatar='' :title='false' :loading='!!item.loading' active='')
        a-list-item-meta(:description="item.text")
          template(#title)
-           a(href='https://www.antdv.com/') {{ item.name }}
+           a(href='https://www.antdv.com/') {{ item.target_name }}
          template(#avatar)
            a-avatar(src="https://joeschmoe.io/api/v1/random") 
-     div(style='margin: 1px;  float: down;') 日期:{{item.created_at}}
 
 
 
