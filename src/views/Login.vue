@@ -22,7 +22,7 @@ autocomplete='off'
 <script>
 import { defineComponent, reactive, ref } from "vue";
 import { mapActions, mapMutations, useStore } from 'vuex'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
     setup() {
@@ -64,10 +64,10 @@ export default defineComponent({
                 json: formState
             })
                 .then((data) => {
-                    console.log('logindata', data.body._token)
+                    // console.log('logindata', data.body._token)
                     if (data) {
-                        store.dispatch('Member/login', data)
-                        router.push({ name: "home" })  // actions
+                        store.commit('Member/loginRequest', data)
+                        router.push({ name: "Home" })  // actions
                     } else {
                         alert('請先加入會員');
                     }

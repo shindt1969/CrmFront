@@ -3,7 +3,6 @@ import router from '@/router'
 
 axios.defaults.timeout = 60000;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-
 const $http = axios;
 
 const state = {
@@ -29,7 +28,6 @@ const beforeApiCall = (method, api, json, ) => {
 const getHttpConfig = ({ rootState }) => {
     return {
         headers: {
-            // id_token:rootState.user.uid,   
             authorization: `Bearer ${rootState.Member.user.token}`,
             accept: 'application/json'
         }
@@ -93,6 +91,7 @@ const actions = {
             beforeApiCall('get', api, json);
             $http.get(api, json, getHttpConfig({ rootState }))
                 .then(({ data }) => {
+                    console.log("return data: ", data);
                     resolve(data);
                 })
                 .catch((error) => {
@@ -103,7 +102,7 @@ const actions = {
 }
 
 export default {
-    namespaced: true,              //(名字間隔)
+    namespaced: true,   //(名字間隔)
     state,
     getters,
     actions,

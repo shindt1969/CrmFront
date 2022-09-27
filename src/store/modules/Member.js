@@ -1,9 +1,11 @@
+import axios from 'axios'
+import router from '@/router'
+
 export default {
     namespaced: true,
     state: {
         user: {
             token: null,
-            isLogin: false,
             id: null,
             account: null,
         },
@@ -11,14 +13,13 @@ export default {
     },
     mutations: {
         resetState(state) {
-            state.user.isLogin = false;
             state.user.token = null;
-            state.douserlist = null;
             state.user.account = null;
+            state.user.id = null;
         },
         loginRequest(state, payLoad) {   //回覆更改state
-            state.user.isLogin = true;
             state.user.token = payLoad.body._token;
+            axios.defaults.headers.common['Authorization'] = `Bearer ${payLoad.body._token}`;
             state.user.account = payLoad.body.account;
             state.user.id = payLoad.body.id;
         },
@@ -26,7 +27,7 @@ export default {
             state.douserlist = { ...state.douserlist, payLoad }
         },
         loginSuccess(state) {      //登入成功後再做...
-            state.user.isLogin = true;
+            // axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
             // state.user.token=null;
             // state.user.account=null;
             // console.log(state.user.account)
@@ -34,7 +35,6 @@ export default {
         setAntMobile(state, formState) {
             state.setAntMobile = formState
         },
-
     },
     actions: {
         register({ commit }, payLoad) {
@@ -45,16 +45,26 @@ export default {
         },
         login({ commit }, payLoad) {
             commit('loginRequest', payLoad)
-            let result = true
-            if (result) {
-                commit('loginSuccess', payLoad)
-                
-            } 
+            commit('loginSuccess', payLoad)
+
         },
         logout({ commit }) {
             commit('resetState');
-            // router.push('/');
+            router.push('/');
         },
+        isLogin({ dispatch, commit, state }) {
+            return new Promise((resolve, reject) => {
+                dispatch("http/get", { api: `/api/admin/verifyToken` }, { root: true }).then((data) => {
+                    if (data.status) {
+                        resolve(true);
+                    } else {
+                        commit('resetState');
+                        resolve(false);
+                    }
+                });
+            });
+        },
+
     },
     getters: {
         status(state) {

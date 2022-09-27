@@ -90,6 +90,8 @@ export default defineComponent({
                         confirm("success store")
                         storeBody.text = "";
                     } else {
+                        data.error ==="0"
+                        
                         console.log("error: ", data)
                     }
                 });
