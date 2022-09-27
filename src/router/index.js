@@ -4,109 +4,102 @@ import Home from "../views/home/Home.vue";
 import store from '@/store/index';
 
 const routes = [
-  {
-    path: "/",
-    component: () => import('../views/Main.vue'),
-    redirect:'/login',
-    children: [
-      {
-        path:"/home",
-        name:'home',
-        component: Home
-      },
-      {
-        path: '/user',
-        name: 'user',
-        component: () => import("../views/user/User.vue")
+    {
+        path: "/",
+        component: () => import('../views/Main.vue'),
+        redirect: '/login',
+        children: [
+            {
+                path: "/home",
+                name: 'Home',
+                component: Home,
+                meta: { requiresAuth: true }
+            },
+            {
+                path: '/user',
+                name: 'user',
+                component: () => import("../views/user/User.vue"),
+                meta: { requiresAuth: true }
+            },
+            {
+                path: '/page1',
+                name: 'page1',
+                component: () => import("../views/Page1.vue")
 
-      },
-      {
-        path: '/page1',
-        name: 'page1',
-        component: () => import("../views/Page1.vue")
+            },
+            {
+                path: '/page2',
+                name: 'page2',
+                component: () => import("../views/Page2.vue")
 
-      },
-      {
-        path: '/page2',
-        name: 'page2',
-        component: () => import("../views/Page2.vue")
-
-      },
+            },
 
 
-    ]
-  },
-  {
-    path: '/BarTemplate',
-    name: 'BarTemplate',
- 
-    component: () => import('../views/BarTemplate.vue'),
-  },
-  {
-    path: '/pending',
-    name: 'Pending',
-    component: () => import('../views/pending.vue'),
-  },
-  {
-    path: "/about",
-    name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Login.vue"),
-  },
-  {
-    path: "/customerSearch",
-    name: "CustomerSearch",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CustomerSearch.vue"),
-  },
-  {
-    path: "/customerConsumption",
-    name: "CustomerConsumption",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CustomerConsumption.vue"),
-  },
-  {
-    path: "/report",
-    name: "Report",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Report.vue")
-  },
-  {
-    path: "/notes",
-    name: "Notes",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Notes.vue")
-  },
-  {
-    path: '/itemnotes/:id',
-    name: "ItemNotes",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ItemNotes.vue")
-    
-  },
+        ]
+    },
+    {
+        path: '/BarTemplate',
+        name: 'BarTemplate',
+
+        component: () => import('../views/BarTemplate.vue'),
+    },
+    {
+        path: '/pending',
+        name: 'Pending',
+        component: () => import('../views/pending.vue'),
+    },
+    {
+        path: "/about",
+        name: "About",
+        component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
+        meta: { requiresAuth: true }
+    },
+    {
+        path: "/login",
+        name: "Login",
+        component: () => import(/* webpackChunkName: "about" */ "../views/Login.vue"),
+        meta: { requiresAuth: false }
+    },
+    {
+        path: "/customerSearch",
+        name: "CustomerSearch",
+        component: () =>
+            import(/* webpackChunkName: "about" */ "../views/CustomerSearch.vue"),
+    },
+    {
+        path: "/customerConsumption",
+        name: "CustomerConsumption",
+        component: () =>
+            import(/* webpackChunkName: "about" */ "../views/CustomerConsumption.vue"),
+    },
+    {
+        path: "/report",
+        name: "Report",
+        component: () =>
+            import(/* webpackChunkName: "about" */ "../views/Report.vue")
+    },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
 });
 
-router.beforeEach((to, from) => {
-    // const store = useStore();
-    console.log('route: ', to)
+router.beforeEach(async (to, from) => {
+    var verify = true;
 
-    if (to.path === '/login' &&  store.state.Member.user.isLogin)
-        return { name: 'home'}
+    console.log('route to : ', to.fullPath);
+    console.log('need auth: ',to.meta.requiresAuth);
+    if (to.meta.requiresAuth){
+        verify = await store.dispatch('Member/isLogin')
+        console.log('return auth: ', verify)
+    }
+    console.log(verify);
+    if (!verify)
+        return { name: 'Login' };
 
-    if (!store.state.Member.user.isLogin)
-        return { name: 'login' }
-
+    console.log("done");
 })
+
 
 export default router;
