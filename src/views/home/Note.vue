@@ -1,8 +1,7 @@
 <template lang="pug">
-
 div(:span='18' style="margin:10px 20px;")   
-
     .card-container(type="flex" justify="center" align="left") 
+
         a-tabs(v-model:activeKey='activeKey' type='card' style="margin-left:100;")
             a-tab-pane(key='1' tab='客戶記事')
                 a-textarea(v-model:value='storeBody.text' placeholder='請輸入記事內容' :rows='4' :maxlength='100' size="large")
@@ -10,20 +9,15 @@ div(:span='18' style="margin:10px 20px;")
                 a-textarea(v-model:value='storeBody.text' placeholder='請輸入記事內容' :rows='4')
             a-tab-pane(key='3' tab='個人記事')
                 a-textarea(v-model:value='storeBody.text' placeholder='請輸入記事內容' :rows='4')
-        div(v-show="OK")
-            NoteCategory
-        div(style="background-color: #F0F1FF; height: 40px;")
-            a-date-picker(v-model:value='today')
 
-            //- a-button(shape='circle' style="margin: 3px;background-color: #F0F1FF")
-            //-     template(#icon)
-            //-         ClockCircleOutlined
+        
+        div(style="background-color: #F0F1FF; height: 40px;")
+
+            a-date-picker(v-model:value='today')
             a-button(style="margin: 3px;background-color: #F0F1FF") 記事範本
                 DownOutlined
-            //- a-button(style="margin: 3px;background-color: #F0F1FF") 記事類別
-            //-     DownOutlined
 
-            a-button(style="margin: 3px;background-color: #F0F1FF" @click="handleMenuClick") 記事類別
+            a-button(style="margin: 3px;background-color: #F0F1FF; position: absolute; z-index: 2" @click="handleMenuClick") 記事類別
                 DownOutlined
 
             a-button(type="primary" style='margin: 3px;  float: right;' @click="storeNote") 存檔
@@ -49,24 +43,18 @@ const get_today = () => {
 
 
 export default defineComponent({
-    props:{
-  'show-NoteCategory': {
-    // 注意：這裡的 Number 無需用引號包成字串，而且首字要大寫
-    type: Boolean
-  } 
-},
+    // emits: ['update'],
     components: {
         ClockCircleOutlined,
         DownOutlined,
         UserOutlined,
         NoteCategory
     },
-    setup() {
+    setup(props, { attrs, slots, emit, expose }) {
         const activeKey = ref('1');
         const store = useStore();
         const datePickerFormat = 'YYYY-MM-DD';
         const today = ref(dayjs(get_today(), datePickerFormat));
-        const OK = ref(true);
 
         const storeBody = reactive({
             text: "",
@@ -111,8 +99,9 @@ export default defineComponent({
         };
 
         const handleMenuClick = e => {
-            OK.value = !(OK.value);
-            console.log('click', OK);
+            emit('update');
+            console.log('click');
+
         };
 
         onMounted(() => {
@@ -125,9 +114,7 @@ export default defineComponent({
             storeNote,
             cancle,
             today,
-            handleButtonClick,
             handleMenuClick,
-            OK
         };
     },
 
