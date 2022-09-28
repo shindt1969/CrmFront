@@ -9,7 +9,6 @@ export function validateNewPassword2(rule, value, callback) {
     const isOpens = useGetters(
         {isOpens: "validations/ageInfo"
         })
-        console.log(isOpens)  
     if (value != isOpens) {
         
         return Promise.reject("請打一樣號碼")

@@ -17,19 +17,17 @@ const getters = {
 const mutations = {
     doregister(state, payLoad) {
         state.douserlist = { ...state.douserlist, payLoad }
-        console.log(state.douserlist)
     }
 }
 
 const beforeApiCall = (method, api, json, ) => {
-    console.log("is caling...", method, api, "data: "+ json);
 }
 
 const getHttpConfig = ({ rootState }) => {
     return {
         headers: {
-            authorization: `Bearer ${rootState.Member.user.token}`,
-            accept: 'application/json'
+            Authorization: `Bearer ${rootState.member.user.token}`,
+            accept: 'application/json',
         }
     };
 }
@@ -66,7 +64,6 @@ const actions = {
             beforeApiCall('post', api, json);
             $http.post(api, json, getHttpConfig({ rootState }))
                 .then(({ data }) => {
-                    console.log("xxxx", data);
                     resolve(data);
                 })
                 .catch((error) => {
@@ -86,12 +83,11 @@ const actions = {
                 });
         });
     },
-    get({ dispatch, commit, state, rootState }, { api, json }) {
+    get({ dispatch, commit, state, rootState }, { api }) {
         return new Promise((resolve, reject) => {
-            beforeApiCall('get', api, json);
-            $http.get(api, json, getHttpConfig({ rootState }))
+            beforeApiCall('get', api);
+            $http.get(api, getHttpConfig({ rootState }))
                 .then(({ data }) => {
-                    console.log("return data: ", data);
                     resolve(data);
                 })
                 .catch((error) => {

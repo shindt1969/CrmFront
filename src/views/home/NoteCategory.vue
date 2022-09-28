@@ -1,93 +1,78 @@
 <template lang="pug">
-div(style='background: #ececec; padding: 30px')
-    a-card(title='Card title' :bordered='false' style='width: 300px')
-        p Card content
-        p Card content
-        p Card content
-    
+
+.lightbox
+  .modal-mask(:style='modalStyle')
+    .modal-container(@click.self='toggleModal')
+      .modal-body
+        header
+          slot(name='header') Default Header
+        hr
+        main
+          // 或者 <slot name="default">Default Body</slot>也可以
+          slot Default Body
+        hr
+        footer
+          slot(name='footer') Default Footer
+  button(@click='isShow = true') Click Me
+
 </template>
         
 <script>
-import { ClockCircleOutlined, DownOutlined, UserOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
-import { useStore } from 'vuex';
-import dayjs from 'dayjs';
 
-const get_today = () => {
-    const date = new Date();
-    var today = date.toLocaleDateString().split('/')
-    return `${today[0]}-${today[1]}-${today[2]}`
-}
-
-
-export default defineComponent({
-    components: {
-        ClockCircleOutlined,
-        DownOutlined,
-        UserOutlined
-    },
-    setup() {
-        const activeKey = ref('1');
-
-        const storeBody = reactive({
-            text: "",
-            owner_id: 1,
-            type_id: activeKey,
-            create_by_id: 1 //從 token 後端附加欄位
-        });
-
-        const store = useStore();
-        const datePickerFormat = 'YYYY-MM-DD';
-        const today = ref(dayjs(get_today(), datePickerFormat));
-
-        watch(activeKey, (val, oldval) => {
-            console.log(val);
-            console.log(oldval);
-        });
-
-        const storeNote = () => {
-            console.log("POST text： ", storeBody.text);
-            store.dispatch('http/post', {
-                api: "/api/admin/contents/create",
-                json: storeBody
-            })
-                .then((data) => {
-                    if (data.status) {
-                        // console.log("success store", data.body)
-                        confirm("success store")
-                        storeBody.text = "";
-                    } else {
-                        console.log("error: ", data)
-                    }
-                });
-        };
-
-        const cancle = () => {
-            storeBody.text = "";
-        };
-
-        const handleButtonClick = e => {
-            console.log('click left button', e);
-        };
-
-        const handleMenuClick = e => {
-            console.log('click', e);
-        };
-
-        onMounted(() => {
-        });
-
-        return {
-        };
-    },
-
-});
 </script>
     
 <style scoped>
-.icons-list :deep(.anticon) {
-    margin-right: 6px;
-    font-size: 24px;
+#app {
+  position: relative;
+  display: block;
+  padding: 1rem;
+  font-size: 1rem;
+  height: 22rem;
+}
+
+label {
+  margin-right: 1rem;
+}
+
+button {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.lightbox {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-mask {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  background-color: rgba(0, 0, 0, .5);
+  transition: opacity .3s ease;
+}
+
+.modal-container {
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+
+}
+
+.modal-body {
+  cursor: auto;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
 }
 </style>
     

@@ -1,6 +1,7 @@
 <template lang="pug">
 
 div(:span='18' style="margin:10px 20px;")   
+
     .card-container(type="flex" justify="center" align="left") 
         a-tabs(v-model:activeKey='activeKey' type='card' style="margin-left:100;")
             a-tab-pane(key='1' tab='客戶記事')
@@ -9,6 +10,8 @@ div(:span='18' style="margin:10px 20px;")
                 a-textarea(v-model:value='storeBody.text' placeholder='請輸入記事內容' :rows='4')
             a-tab-pane(key='3' tab='個人記事')
                 a-textarea(v-model:value='storeBody.text' placeholder='請輸入記事內容' :rows='4')
+        div(v-show="OK")
+            NoteCategory
         div(style="background-color: #F0F1FF; height: 40px;")
             a-date-picker(v-model:value='today')
 
@@ -19,17 +22,9 @@ div(:span='18' style="margin:10px 20px;")
                 DownOutlined
             //- a-button(style="margin: 3px;background-color: #F0F1FF") 記事類別
             //-     DownOutlined
-            a-dropdown
-                template(#overlay)
-                    a-menu(@click='handleMenuClick') 
-                        div(v-show="OK")
-                            NoteCategory
-                        //- a-menu-item(key=index v-for="index in 100")
-                        //-     | {{ index }} menu item
-                a-button
-                    | 記事類別
-                    DownOutlined
 
+            a-button(style="margin: 3px;background-color: #F0F1FF" @click="handleMenuClick") 記事類別
+                DownOutlined
 
             a-button(type="primary" style='margin: 3px;  float: right;' @click="storeNote") 存檔
             a-button(style='margin: 3px;  float: right;' @click="cancle") 取消
@@ -42,7 +37,8 @@ import { ClockCircleOutlined, DownOutlined, UserOutlined } from '@ant-design/ico
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import  NoteCategory from "./NoteCategory.vue";
+import NoteCategory from "./NoteCategory.vue";
+import { bool } from 'vue-types';
 
 
 const get_today = () => {
@@ -53,23 +49,30 @@ const get_today = () => {
 
 
 export default defineComponent({
+    props:{
+  'show-NoteCategory': {
+    // 注意：這裡的 Number 無需用引號包成字串，而且首字要大寫
+    type: Boolean
+  } 
+},
     components: {
         ClockCircleOutlined,
         DownOutlined,
-        UserOutlined
+        UserOutlined,
+        NoteCategory
     },
     setup() {
         const activeKey = ref('1');
         const store = useStore();
         const datePickerFormat = 'YYYY-MM-DD';
         const today = ref(dayjs(get_today(), datePickerFormat));
-        const OK = ref(false);
+        const OK = ref(true);
 
         const storeBody = reactive({
             text: "",
             target_id: 1,
             target_type_id: activeKey,
-            create_by_id: store.state.Member.user.id
+            create_by_id: store.state.member.user.id
         });
 
 
@@ -79,22 +82,24 @@ export default defineComponent({
         });
 
         const storeNote = () => {
-            console.log("POST text： ", storeBody.text);
-            store.dispatch('http/post', {
-                api: "/api/admin/contents/create",
-                json: storeBody
-            })
-                .then((data) => {
-                    if (data.status) {
-                        // console.log("success store", data.body)
-                        confirm("success store")
-                        storeBody.text = "";
-                    } else {
-                        data.error ==="0"
-                        
-                        console.log("error: ", data)
-                    }
-                });
+            // 清除所有空白字元之後字串等於沒有，也就是只有空白字元
+            if (storeBody.text.replace(/^\s+|\s+$/g, "") !== "") {
+                store.dispatch('http/post', {
+                    api: "/api/admin/contents/create",
+                    json: storeBody
+                })
+                    .then((data) => {
+                        if (data.status) {
+                            confirm("success store")
+                            storeBody.text = "";
+                        } else {
+                            data.error === "0"
+                            console.log("error: ", data)
+                        }
+                    });
+            } else {
+                confirm("記事簿能為空");
+            }
         };
 
         const cancle = () => {
@@ -106,16 +111,15 @@ export default defineComponent({
         };
 
         const handleMenuClick = e => {
-            OK
-            console.log('click', e);
+            OK.value = !(OK.value);
+            console.log('click', OK);
         };
 
         onMounted(() => {
         });
-        
+
 
         return {
-            NoteCategory,
             storeBody,
             activeKey,
             storeNote,
@@ -134,6 +138,10 @@ export default defineComponent({
 .icons-list :deep(.anticon) {
     margin-right: 6px;
     font-size: 24px;
+}
+
+.hello {
+    position: relative;
 }
 </style>
 

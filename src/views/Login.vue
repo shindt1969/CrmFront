@@ -38,26 +38,7 @@ export default defineComponent({
             email: store.state.validations.emails, // email: 對應到 name="email"
             password: store.state.validations.password
         }
-
-        // const register = (user) => {
-        //     if (user.account != "" && user.password != "") {
-        //         store.dispatch('http/post', {
-        //             api: "api/admin/login",
-        //             json: user
-        //         })
-        //             .then((data) => {
-        //                 console.log('tt', data)
-        //                 if (data) {
-        //                     store.commit('Member/doregister', data)  //actions
-        //                 } else {
-        //                     alert('NO-REGISTER');
-        //                 }
-        //             })
-        //     } else {
-        //         alert('Please fill the text!(register)');
-        //     }
-        // }
-
+        
         const doLogin = (formState) => {
             store.dispatch('http/post', {
                 api: "api/admin/login",
@@ -66,7 +47,7 @@ export default defineComponent({
                 .then((data) => {
                     // console.log('logindata', data.body._token)
                     if (data) {
-                        store.commit('Member/loginRequest', data)
+                        store.commit('member/loginRequest', data)
                         router.push({ name: "Home" })  // actions
                     } else {
                         alert('請先加入會員');
@@ -74,14 +55,30 @@ export default defineComponent({
                 })
         }
         const onFinish = values => {
-            const getlist = store.state.Member.age
-            // console.log('getlist', getlist)
-            // console.log('Success:', values);
+            const getlist = store.state.member.age
+
         };
 
         const onFinishFailed = errorInfo => {
-            // console.log('Failed:', errorInfo);
         };
+
+                // const register = (user) => {
+        //     if (user.account != "" && user.password != "") {
+        //         store.dispatch('http/post', {
+        //             api: "api/admin/login",
+        //             json: user
+        //         })
+        //             .then((data) => {
+        //                 if (data) {
+        //                     store.commit('member/doregister', data)  //actions
+        //                 } else {
+        //                     alert('NO-REGISTER');
+        //                 }
+        //             })
+        //     } else {
+        //         alert('Please fill the text!(register)');
+        //     }
+        // }
 
         return { formState, rules, onFinish, onFinishFailed, doLogin, remember };
     },

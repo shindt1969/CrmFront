@@ -26,18 +26,16 @@ export default {
     })
     const router = useRouter();
     const store = useStore();
-    // const username =  useGetters('Member/nameInfo');
+    // const username =  useGetters('member/nameInfo');
     // const ageInfo2 = computed(() => store.getters.ageInfo)
 
     onMounted(() => {
          store.dispatch('http/post',{
             api:"auth/getinfro"}
             ).then((data)=>{
-               console.log('tt',data)
               if(data){
                 datas.newsdata = data[0]
-                console.log(datas)
-                // store.commit('Member/doregister',data)   //actions
+                // store.commit('member/doregister',data)   //actions
               }else{
                 alert('check no user data');
                 // router.push({ name: "Login" })
@@ -45,24 +43,10 @@ export default {
     });
     const doLogout = () =>{
         // store.dispatch('logout')
-        store.commit('Member/resetState')
+        store.commit('member/resetState')
         // router.push({ name: "Login" });
         }
 
-
-    //  const Infocheck =() =>{
-    //       store.dispatch('http/post',{
-    //         api:"auth/getinfro"}
-    //         )
-    //         .then((data)=>{
-    //            console.log('tt',data)
-    //           if(data){
-    //             console.log(data)
-    //             // store.commit('Member/doregister',data)   //actions
-    //           }else{
-    //             alert('NO-REGISTER');
-    //             } })
-    //   }
     return {datas,doLogout};
   },
 }

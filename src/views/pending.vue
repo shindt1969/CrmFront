@@ -61,10 +61,8 @@ export default defineComponent({
 
   let  validateNewPassword2 = (rule, value, callback,source) => {
       if ( value !=formState.mobile) {
-        console.log(formState.mobile)
         return  Promise.reject("請打一樣號碼")
       } else {
-        console.log(formState.mobile)
         return Promise;
       }
   };
@@ -88,7 +86,7 @@ export default defineComponent({
 
     const isOpen = useGetters(
      {
-     isOpen: "Member/status"  
+     isOpen: "member/status"  
      })
 
      const isOpens = useGetters(

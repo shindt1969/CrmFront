@@ -9910,7 +9910,14 @@
     "deepmerge" "^4.2.2"
     "shvl" "^2.0.3"
 
-"vuex@^3.0 || ^4.0.0-rc", "vuex@^4.0.0-0":
+"vuex-persister@^1.0.0":
+  "integrity" "sha512-7Flmi5oY163/y7mpbI0fnxEgsJGPZqtqvItKn+BUWVaY0X5S6Mqq49q9uiRMMXpXbA5PeuW9wmEOna64ipaODw=="
+  "resolved" "https://registry.npmjs.org/vuex-persister/-/vuex-persister-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "deepmerge" "^4.2.2"
+
+"vuex@^3.0 || ^4.0.0", "vuex@^3.0 || ^4.0.0-rc", "vuex@^4.0.0-0":
   "integrity" "sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q=="
   "resolved" "https://registry.npmmirror.com/vuex/-/vuex-4.0.2.tgz"
   "version" "4.0.2"

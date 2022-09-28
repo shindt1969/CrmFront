@@ -13,13 +13,14 @@ export default {
     },
     mutations: {
         resetState(state) {
-            state.user.token = null;
-            state.user.account = null;
-            state.user.id = null;
+            console.log("im calling reset!!");
+            // state.user.token = null;
+            // state.user.account = null;
+            // state.user.id = null;
         },
         loginRequest(state, payLoad) {   //回覆更改state
             state.user.token = payLoad.body._token;
-            axios.defaults.headers.common['Authorization'] = `Bearer ${payLoad.body._token}`;
+            // axios.defaults.headers.common['Authorization'] = `Bearer ${payLoad.body._token}`;
             state.user.account = payLoad.body.account;
             state.user.id = payLoad.body.id;
         },
@@ -27,20 +28,24 @@ export default {
             state.douserlist = { ...state.douserlist, payLoad }
         },
         loginSuccess(state) {      //登入成功後再做...
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
             // state.user.token=null;
             // state.user.account=null;
-            // console.log(state.user.account)
         },
         setAntMobile(state, formState) {
             state.setAntMobile = formState
         },
+        initialiseStore(state) {
+			// Check if the ID exists
+			if(localStorage.getItem('store')) {
+				// Replace the state object with the stored item
+                state.user = JSON.parse(localStorage.getItem('store'));
+			}
+		}
     },
     actions: {
         register({ commit }, payLoad) {
             setTimeout(() => {
                 commit('doregister', payLoad)
-                //  console.log(payLoad)
             }, 10000)
         },
         login({ commit }, payLoad) {
@@ -55,6 +60,7 @@ export default {
         isLogin({ dispatch, commit, state }) {
             return new Promise((resolve, reject) => {
                 dispatch("http/get", { api: `/api/admin/verifyToken` }, { root: true }).then((data) => {
+                    console.log("data.status: ",data.status);
                     if (data.status) {
                         resolve(true);
                     } else {

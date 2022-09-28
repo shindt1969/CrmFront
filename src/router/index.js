@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/home/Home.vue";
-// import { useStore } from 'vuex'
 import store from '@/store/index';
 
 const routes = [
@@ -17,7 +16,7 @@ const routes = [
             },
             {
                 path: '/user',
-                name: 'user',
+                name: 'User',
                 component: () => import("../views/user/User.vue"),
                 meta: { requiresAuth: true }
             },
@@ -58,7 +57,7 @@ const routes = [
         path: "/login",
         name: "Login",
         component: () => import(/* webpackChunkName: "about" */ "../views/Login.vue"),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
     },
     {
         path: "/customerSearch",
@@ -85,20 +84,33 @@ const router = createRouter({
     routes,
 });
 
+/* 全部情況：
+ * 一、login 畫面已 verify                   (重導向到 home)
+ * 二、login 畫面未 verify                   (放行)
+ * 三、需要 verify 的非 login 畫面未 verify   (重導向到 login)
+ * 四、需要 verify 的非 login 畫面已 verify   (放行)
+ * 五、不需要 verify 的非 login 畫面未 verify (放行)
+ * 六、不需要 verify 的非 login 畫面已 verify (放行)
+*/ 
 router.beforeEach(async (to, from) => {
     var verify = true;
 
-    console.log('route to : ', to.fullPath);
-    console.log('need auth: ',to.meta.requiresAuth);
-    if (to.meta.requiresAuth){
-        verify = await store.dispatch('Member/isLogin')
-        console.log('return auth: ', verify)
-    }
-    console.log(verify);
-    if (!verify)
-        return { name: 'Login' };
+    console.log("route to: ", to.fullPath);
 
-    console.log("done");
+    // 判斷是否需要 verify
+    if (to.meta.requiresAuth){
+        verify = await store.dispatch('member/isLogin')
+        console.log("verify: ", verify);
+    }
+    // 需要 verify 的非 login 畫面未 verify
+    if (!verify && to.name!=="Login"){
+        console.log("not verify ");
+        return { name: 'Login' };
+    } 
+    // login 畫面已 verify 
+    if (verify && to.name==="Login") {
+        return { name: 'Home' };
+    }
 })
 
 

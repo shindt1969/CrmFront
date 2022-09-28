@@ -38,7 +38,6 @@ export default defineComponent({
 
 
         const getnote =()=>{
-          console.log('tts')
           store.dispatch('http/get',{
                 api:"/api/admin/contents/1/5"})
         .then((data)=>{
@@ -50,7 +49,6 @@ export default defineComponent({
         })};
 
         onMounted(() => {
-            console.log('myheader mounted');
             getnote();
           })
 

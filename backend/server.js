@@ -37,7 +37,6 @@ app.use((req, res, next) => {
 // app.set('port', (process.env.PORT || 8080));
 
 app.post('/api/auth/register', function(req, res) {
-  // console.log('321',req.body) 
   var  username = req.body.username;
   var  password = bcrypt.hashSync(req.body.password,10);
   var  addSql = 'INSERT INTO User(Cname,Cpassword) VALUES(?,?)';
@@ -45,19 +44,12 @@ app.post('/api/auth/register', function(req, res) {
   var  addSqlParams = [username, password];
   connection.query(seachSql,addSqlParams[0],function (err, result){
     if(result.length == 0){
-      console.log('123',result.length,err)
       connection.query(addSql,addSqlParams,function (err, result) {
         if(err){
-         console.log('[INSERT ERROR] - ',err.message);
          return;
         }        
-       console.log('--------------------------INSERT----------------------------');
-       //console.log('INSERT ID:',result.insertId);        
-       console.log('INSERT ID:',result);        
-       console.log('-----------------------------------------------------------------\n\n');  
           });
     }else{
-      console.log(result.length)
       res.send(" it the same account");
     }
   });
@@ -71,10 +63,8 @@ app.post('/api/auth/login',function(req,res){
   var  addSqlParams = [username, password];
   connection.query(addSql,addSqlParams[0],function (err, result) {
     if(err){
-     console.log('[INSERT ERROR] - ',err.message);
      return;
     }else if( Object.keys(result).length ===0) {
-      console.log('can not find database',req.body)
       res.send(false);
     }else{
       const isMatch = bcrypt.compareSync(addSqlParams[1],result[0].Cpassword)
@@ -83,7 +73,6 @@ app.post('/api/auth/login',function(req,res){
           user_name:result[0].Cname
         }
         const token = jwt.sign({payload, exp: Math.floor(Date.now() / 1000)+(60*15)},'my_secret_key');
-        console.log(Object.assign({ code: 200},{ message:'登入成功',token}),result[0].Cpassword,'backend check is membership')
         res.send(Object.assign({ code: 200},{ message:'登入成功',token})); /// 登入成功
       }else{
         res.send(false);
@@ -107,19 +96,15 @@ app.post('/api/auth/getinfro',function(req,res){
   if( typeof bearerHeader !=='undefined'){
     const bearer = bearerHeader.split(' '); // 字串切割
     const bearerToken = bearer[1];
-    console.log(bearerHeader,"/",bearer)
     jwt.verify(bearerToken, 'my_secret_key', (err, payload) => {
       if(err){
-        console.log("1",err.name,bearerToken)
         res.send(bearerToken);
       }else{
         var username = payload.payload.user_name
         var  addSql = 'SELECT *FROM UserInfo WHERE Cname = ?';
         var  addSqlParams = [username];
-        console.log("flag",username)
         connection.query(addSql,addSqlParams[0],function (err, result) {
           if(err){
-            console.log('[INSERT ERROR] - ',err.message);
             return;
           }else if( Object.keys(result).length ===0){
             
@@ -139,9 +124,4 @@ app.post('/api/auth/getinfro',function(req,res){
 
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
 });
-
-// app.listen(app.get('port'), () => {
-//     console.log(`Find the server at: http://localhost:${app.get('port')}/`);
-//   });
