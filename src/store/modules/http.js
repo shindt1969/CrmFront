@@ -36,12 +36,7 @@ const errorHandle = (commit, error) => {
     console.log("api error", error);
     error.status = parseInt(error.status);
     if (error.status == 401) {
-        if (error.data.code == 7) {
-            console.log("verify needed");
-        } else {
-            //other auth problem
-            router.push({ name: 'logout' });
-        }
+        123
     }
     else if (error.status == 403) {
         commit('dialogBox', { dialog: true, option: { title: "權限不足", message: "你沒有權限瀏覽此內容喔!" } }, { root: true });

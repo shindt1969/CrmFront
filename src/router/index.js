@@ -100,11 +100,9 @@ router.beforeEach(async (to, from) => {
     // 判斷是否需要 verify
     if (to.meta.requiresAuth){
         verify = await store.dispatch('member/isLogin')
-        console.log("verify: ", verify);
     }
     // 需要 verify 的非 login 畫面未 verify
     if (!verify && to.name!=="Login"){
-        console.log("not verify ");
         return { name: 'Login' };
     } 
     // login 畫面已 verify 

@@ -45,12 +45,16 @@ export default defineComponent({
                 json: formState
             })
                 .then((data) => {
-                    // console.log('logindata', data.body._token)
-                    if (data) {
-                        store.commit('member/loginRequest', data)
-                        router.push({ name: "Home" })  // actions
+                    if (Object.prototype.hasOwnProperty.call(data, "status")) {
+                        if (data.status){
+                            store.commit('member/loginRequest', data)
+                            router.push({ name: "Home" })  // actions
+                        }else if (data.error==='5'){
+                            alert('帳號或密碼錯誤');
+                        }
                     } else {
-                        alert('請先加入會員');
+                        console.log('login fail: ', data)
+                        alert('發生某種錯誤');
                     }
                 })
         }

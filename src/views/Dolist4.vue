@@ -37,7 +37,6 @@ export default defineComponent({
         .then((data) => {
           if (data.status) {
             datas.value = data.body;
-            console.log("flaf", datas.value);
           } else {
             console.log(data)
             alert("NO-REGISTER");
