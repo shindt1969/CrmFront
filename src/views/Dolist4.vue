@@ -4,7 +4,7 @@ a-list(item-layout="horizontal", :data-source="datas")
     a-list-item
      template(#actions)
        a(key='list-loadmore-edit') edit
-       a(key='list-loadmore-more' @click="removeItem(index)") delete
+       a(key='list-loadmore-more' @click="removeItem(datas.indexOf(item))") delete
      div(style='margin: 1px; width : 1px; font-size:2px; margin-top: 80px; margin-right:1px;  ') {{item.created_at}}  
 
      a-skeleton(avatar='' :title='false' :loading='!!item.loading' active='')
@@ -14,9 +14,7 @@ a-list(item-layout="horizontal", :data-source="datas")
          template(#avatar)
            a-avatar(src="https://joeschmoe.io/api/v1/random") 
 
-
 </template>
-
 
 
 
@@ -44,8 +42,9 @@ export default defineComponent({
         });
     };
 
-
       const removeItem = (index) => {  //移除訊息
+        console.log(index);
+        console.log(datas.value);
         datas.value.splice(index, 1)
      } 
 
