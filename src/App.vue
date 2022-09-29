@@ -14,7 +14,7 @@ export default {
             store.commit('member/initialiseStore');
             store.subscribe((mutation, state) => {
                 // Store the state object as a JSON string
-                console.log("init: ", JSON.stringify(state.member.user));
+                // console.log("init: ", JSON.stringify(state.member.user));
                 localStorage.setItem('store', JSON.stringify(state.member.user));
             });
         })

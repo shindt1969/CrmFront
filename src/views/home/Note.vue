@@ -31,8 +31,7 @@ import { ClockCircleOutlined, DownOutlined, UserOutlined } from '@ant-design/ico
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import NoteCategory from "./NoteCategory.vue";
-import { bool } from 'vue-types';
+// import { bool } from 'vue-types';
 
 
 const get_today = () => {
@@ -48,7 +47,6 @@ export default defineComponent({
         ClockCircleOutlined,
         DownOutlined,
         UserOutlined,
-        NoteCategory
     },
     setup(props, { attrs, slots, emit, expose }) {
         const activeKey = ref('1');

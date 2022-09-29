@@ -14,9 +14,9 @@ export default {
     mutations: {
         resetState(state) {
             console.log("im calling reset!!");
-            // state.user.token = null;
-            // state.user.account = null;
-            // state.user.id = null;
+            state.user.token = null;
+            state.user.account = null;
+            state.user.id = null;
         },
         loginRequest(state, payLoad) {   //回覆更改state
             state.user.token = payLoad.body._token;
@@ -60,7 +60,6 @@ export default {
         isLogin({ dispatch, commit, state }) {
             return new Promise((resolve, reject) => {
                 dispatch("http/get", { api: `/api/admin/verifyToken` }, { root: true }).then((data) => {
-                    console.log("data.status: ",data.status);
                     if (data.status) {
                         resolve(true);
                     } else {
