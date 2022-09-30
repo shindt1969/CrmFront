@@ -1,5 +1,4 @@
 <template lang="pug">
-#nav
 router-view
 </template>
 

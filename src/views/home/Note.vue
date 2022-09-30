@@ -1,4 +1,5 @@
 <template lang="pug">
+
 div(:span='18' style="margin:10px 20px;")   
     .card-container(type="flex" justify="center" align="left") 
 
@@ -10,19 +11,24 @@ div(:span='18' style="margin:10px 20px;")
             a-tab-pane(key='3' tab='個人記事')
                 a-textarea(v-model:value='storeBody.text' placeholder='請輸入記事內容' :rows='4')
 
-        
         div(style="background-color: #F0F1FF; height: 40px;")
 
             a-date-picker(v-model:value='today')
             a-button(style="margin: 3px;background-color: #F0F1FF") 記事範本
                 DownOutlined
 
-            a-button(style="margin: 3px;background-color: #F0F1FF; position: absolute; z-index: 2" @click="handleMenuClick") 記事類別
-                DownOutlined
+            //- a-button(style="margin: 3px;background-color: #F0F1FF; position: absolute; z-index: 2" @click="handleMenuClick") 記事類別
+            //-     DownOutlined
 
+            a-dropdown(:trigger="['click']" :placement='top' v-model:visible="visible")
+                a.ant-dropdown-link(@click.prevent='')
+                    | 記事類別
+                    DownOutlined
+                template(#overlay)
+                    NoteCategory
             a-button(type="primary" style='margin: 3px;  float: right;' @click="storeNote") 存檔
             a-button(style='margin: 3px;  float: right;' @click="cancle") 取消
-        div(style='margin-right: 10px;  float: right;')
+            div(style='margin-right: 10px;  float: right;')
 
 </template>
     
@@ -32,7 +38,7 @@ import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
 // import { bool } from 'vue-types';
-
+import NoteCategory from "./NoteCategory.vue";
 
 const get_today = () => {
     const date = new Date();
@@ -47,12 +53,14 @@ export default defineComponent({
         ClockCircleOutlined,
         DownOutlined,
         UserOutlined,
+        NoteCategory
     },
     setup(props, { attrs, slots, emit, expose }) {
         const activeKey = ref('1');
         const store = useStore();
         const datePickerFormat = 'YYYY-MM-DD';
         const today = ref(dayjs(get_today(), datePickerFormat));
+        const visible = ref(false);
 
         const storeBody = reactive({
             text: "",
@@ -95,16 +103,17 @@ export default defineComponent({
         const handleButtonClick = e => {
             console.log('click left button', e);
         };
-
+        const OK = ref(true);
         const handleMenuClick = e => {
-            emit('update');
-            console.log('click');
+            // emit('update');
+            // console.log('click');
+            OK.value = !(OK.value);
+            console.log('click: ', OK.value);
 
         };
 
         onMounted(() => {
         });
-
 
         return {
             storeBody,
@@ -113,6 +122,7 @@ export default defineComponent({
             cancle,
             today,
             handleMenuClick,
+            visible
         };
     },
 
@@ -120,13 +130,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.icons-list :deep(.anticon) {
-    margin-right: 6px;
-    font-size: 24px;
-}
 
-.hello {
-    position: relative;
-}
 </style>
 

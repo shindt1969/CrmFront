@@ -84,7 +84,8 @@ const router = createRouter({
     routes,
 });
 
-/* 全部情況：
+/* 
+ * 全部情況：
  * 一、login 畫面已 verify                   (重導向到 home)
  * 二、login 畫面未 verify                   (放行)
  * 三、需要 verify 的非 login 畫面未 verify   (重導向到 login)

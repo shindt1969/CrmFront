@@ -1,9 +1,7 @@
 <template lang="pug">
 
-a-row(:gutter='[40,16]')
-    NoteCategory(v-show="OK")
-
-    a-col(:span='16' style="margin-top:50px")
+a-row(:gutter='[0,16]')
+    a-col(:span='24' style="margin-top:50px")
         a-card(style="height: 800px;")
             Note(@update="showNoteCategoryArea")
             Dolist4
@@ -44,11 +42,6 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less" scoped>
-.home {
-    .user {
-        margin-left: 1000px;
-        width: 10000;
-    }
-}
+<style scoped>
+
 </style>

@@ -1,11 +1,31 @@
 <template lang="pug">
 
-.hello 
-    .innerhehho
-        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{ overflow: 'auto', left: 0, top: 0, bottom: 0 }")
+.hello
+    .innerhello(justify="center" align="left")
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
             | {{ label }}
-        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{ overflow: 'auto', left: 0}")
+        br
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
             | {{ label }}
+        br
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
+            | {{ label }}
+        br
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
+            | {{ label }}
+        br
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
+            | {{ label }}
+        br
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
+            | {{ label }}
+        br
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
+            | {{ label }}
+        br
+        a-checkbox(v-model:checked='checked' :disabled='disabled' :style="{left: 0, top: 0, bottom: 0 }")
+            | {{ label }}
+        br
 
 </template>
         
@@ -16,15 +36,13 @@ import { defineComponent, ref, computed } from 'vue';
 import Dolist4 from "../Dolist4.vue";
 import Note from "./Note.vue";
 
-
 export default defineComponent({
     name: "NoteCategory",
     setup() {
-
         const checked = ref(false);
         const disabled = ref(false);
 
-        const label = ref("hello");
+        const label = ref("hello ");
 
         return { checked, disabled, label };
     }
@@ -33,23 +51,21 @@ export default defineComponent({
     
 <style scoped>
 .hello {
-    position: absolute;
-    /* -webkit-box-shadow: 0px 6px 20px 0px #43434b; */
+    /* position: absolute; */
     box-shadow: 0px 6px 20px 0px #43434b;
     bottom: 36px;
     background: #fff;
-    /* display: block; */
-    /* -webkit-box-shadow: 0px 5px 15px -5px rgb(0 0 0 / 51%); */
-    /* -o-box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.506); */
-    margin-bottom: 350px;
-    margin-left: 200px;
+    margin-top: 5px;
+    /* margin-left: 200px; */
     width: 300px;
     height: 220px;
     z-index: 2;
 }
-.innerhehho{
+.innerhello{
     width: 300px;
-    height: 110px;
+    height: 150px;
+    overflow : auto;
+    /* background-color: coral; */
 }
 
 </style>
