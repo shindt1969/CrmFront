@@ -3,7 +3,7 @@
 a-row(:gutter='[0,16]')
     a-col(:span='24' style="margin-top:50px")
         a-card(style="height: 800px;")
-            Note(@update="showNoteCategoryArea")
+            Note
             Dolist4
       
 </template>
@@ -26,18 +26,7 @@ export default defineComponent({
         Note
     },
     setup() {
-        const OK = ref(true);
-
-        const somebodyWantMeToDo = () => {
-            console.log("do womething")
-        }
-
-        const showNoteCategoryArea = e => {
-            OK.value = !(OK.value);
-            console.log('click', OK.value);
-        };
-
-        return { OK, showNoteCategoryArea };
+        return {  };
     }
 });
 </script>

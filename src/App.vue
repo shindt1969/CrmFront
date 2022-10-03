@@ -5,18 +5,13 @@ router-view
 <script>
 import { onBeforeMount } from 'vue';
 import store from '@/store/index';
-
+import home from './views/home/Home.vue';
 
 export default {
+    components: {
+    home,
+  },
     setup() {
-        onBeforeMount(() => {
-            store.commit('member/initialiseStore');
-            store.subscribe((mutation, state) => {
-                // Store the state object as a JSON string
-                // console.log("init: ", JSON.stringify(state.member.user));
-                localStorage.setItem('store', JSON.stringify(state.member.user));
-            });
-        })
     },
 }
 </script>

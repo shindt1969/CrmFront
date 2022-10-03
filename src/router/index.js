@@ -93,6 +93,7 @@ const router = createRouter({
  * 五、不需要 verify 的非 login 畫面未 verify (放行)
  * 六、不需要 verify 的非 login 畫面已 verify (放行)
 */ 
+
 router.beforeEach(async (to, from) => {
     var verify = true;
 

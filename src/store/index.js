@@ -4,15 +4,10 @@ import http from './modules/http'
 import member from "./modules/member";
 import validations from "./modules/validations";
 import createPersistedState from "vuex-persistedstate"
-// import VuexPersister from 'vuex-persister'
-
-// const vuexPersister = new VuexPersister({
-//     // ...your options
-// })
 
 export default createStore({
     strict: process.env.NODE_ENV !== 'production',
-    // plugins: [createPersistedState({ key: 'keepper', paths: ['member.user', 'member.douserlist'] })],
+    plugins: [createPersistedState({ key: 'keepper', paths: ['member.user', 'member.douserlist'] })],
 
 
     modules: {
