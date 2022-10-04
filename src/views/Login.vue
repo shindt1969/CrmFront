@@ -66,7 +66,7 @@ export default defineComponent({
         const onFinishFailed = errorInfo => {
         };
 
-                // const register = (user) => {
+        //       const register = (user) => {
         //     if (user.account != "" && user.password != "") {
         //         store.dispatch('http/post', {
         //             api: "api/admin/login",
