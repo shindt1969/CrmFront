@@ -22,7 +22,7 @@ export default defineComponent({
     const filteredInfo = ref();
     const sortedInfo = ref();
     const getnote =()=> store.dispatch('http/get',{
-        api:"/admin/contents/1"})
+        api:"/admin/notes/1"})
     .then((data)=>{
         console.log('tt',data.value)
         if(data.status){

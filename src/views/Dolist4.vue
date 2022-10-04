@@ -12,7 +12,7 @@ a-list(item-layout="horizontal", :data-source="datas")
                     template(#title)
                         a(href='https://www.antdv.com/') {{ item.target_name }}
                     template(#avatar)
-                        a-avatar(src="https://joeschmoe.io/api/v1/random") 
+                    a-avatar(src="https://joeschmoe.io/api/v1/random") 
 </template>
 
 

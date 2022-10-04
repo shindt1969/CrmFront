@@ -12,21 +12,21 @@ div(:span='18' style="margin:10px 20px;")
                 a-textarea(v-model:value='storeBody.text' placeholder='請輸入記事內容' :rows='4')
 
         div(style="background-color: #F0F1FF; height: 40px;")
-
-            a-date-picker(v-model:value='today')
-            a-button(style="margin: 3px;background-color: #F0F1FF") 記事範本
-                DownOutlined
-
-            //- a-button(style="margin: 3px;background-color: #F0F1FF; position: absolute; z-index: 2" @click="handleMenuClick") 記事類別
-            //-     DownOutlined
-
-            a-dropdown(:trigger="['click']" :placement='top' v-model:visible="visible")
-                a.ant-dropdown-link(@click.prevent='')
+            a-date-picker(v-model:value='today' style="margin: 4px;")
+            a-dropdown(:trigger="['click']" :placement='top' v-model:visible="categoryVisible")
+                a.ant-dropdown-link(@click.prevent='' style="margin:10px 10px;")
                     | 記事類別
                     DownOutlined
                 template(#overlay)
+                    NoteCategory(v-bind:categories="pCategories")
+            a-dropdown(:trigger="['click']" :placement='top' v-model:visible="exampleVisible")
+                a.ant-dropdown-link(@click.prevent='' style="margin:10px 10px;")
+                    | 記事範本
+                    DownOutlined
+                template(#overlay)
                     NoteCategory
-            a-button(type="primary" style='margin: 3px;  float: right;' @click="storeNote") 存檔
+
+            a-button(type="primary" style='margin: 4px;  float: right;' @click="storeNote") 存檔
             a-button(style='margin: 3px;  float: right;' @click="cancle") 取消
             div(style='margin-right: 10px;  float: right;')
 
@@ -34,9 +34,9 @@ div(:span='18' style="margin:10px 20px;")
     
 <script>
 import { ClockCircleOutlined, DownOutlined, UserOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, ref, reactive, watch, onMounted, computed } from 'vue';
 import dayjs from 'dayjs';
+import { useStore } from "vuex";
 // import { bool } from 'vue-types';
 import NoteCategory from "./NoteCategory.vue";
 
@@ -48,51 +48,57 @@ const get_today = () => {
 
 
 export default defineComponent({
-    // emits: ['update'],
     components: {
         ClockCircleOutlined,
         DownOutlined,
         UserOutlined,
         NoteCategory
     },
-    setup(props, { attrs, slots, emit, expose }) {
+    setup() {
         const activeKey = ref('1');
-        const store = useStore();
         const datePickerFormat = 'YYYY-MM-DD';
         const today = ref(dayjs(get_today(), datePickerFormat));
-        const visible = ref(false);
+        const categoryVisible = ref(false);
+        const exampleVisible = ref(false);
+        const pCategories = ref([]);
+        const store = useStore();
+
+        const categoryIds = computed(() => {
+            var checkedCategories = pCategories.value.filter(category => category.checked);
+
+            return checkedCategories.map((category) => {
+                console.log("category: ", category);
+                if (category.checked)
+                    return category.id;
+            });
+        });
 
         const storeBody = reactive({
             text: "",
             target_id: 1,
             target_type_id: activeKey,
-            create_by_id: store.state.member.user.id
-        });
-
-
-        watch(activeKey, (val, oldval) => {
-            console.log(val);
-            console.log(oldval);
+            create_by_id: store.state.member.user.id,
+            categoryIds: categoryIds
         });
 
         const storeNote = () => {
             // 清除所有空白字元之後字串等於沒有，也就是只有空白字元
             if (storeBody.text.replace(/^\s+|\s+$/g, "") !== "") {
                 store.dispatch('http/post', {
-                    api: "/api/admin/contents/create",
+                    api: "/api/admin/notes/create",
                     json: storeBody
                 })
                     .then((data) => {
                         if (data.status) {
-                            confirm("success store")
+                            confirm("success store");
                             storeBody.text = "";
                         } else {
-                            data.error === "0"
-                            console.log("error: ", data)
+                            console.log("error: ", data);
+                            return data;
                         }
                     });
             } else {
-                confirm("記事簿能為空");
+                confirm("記事不能為空");
             }
         };
 
@@ -100,19 +106,23 @@ export default defineComponent({
             storeBody.text = "";
         };
 
-        const handleButtonClick = e => {
-            console.log('click left button', e);
-        };
-        const OK = ref(true);
-        const handleMenuClick = e => {
-            // emit('update');
-            // console.log('click');
-            OK.value = !(OK.value);
-            console.log('click: ', OK.value);
-
+        const getNoteCategories = () => {
+            store.dispatch("http/get", {
+                api: "/api/admin/noteCategories",
+            })
+                .then((data) => {
+                    if (data.status) {
+                        pCategories.value = data.body;
+                        pCategories.value.forEach(label => label.checked = false)
+                    } else {
+                        console.log(data)
+                        alert("NO-REGISTER");
+                    }
+                });
         };
 
         onMounted(() => {
+            getNoteCategories()
         });
 
         return {
@@ -121,8 +131,9 @@ export default defineComponent({
             storeNote,
             cancle,
             today,
-            handleMenuClick,
-            visible
+            categoryVisible,
+            exampleVisible,
+            pCategories
         };
     },
 

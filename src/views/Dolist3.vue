@@ -39,7 +39,7 @@ export default defineComponent({
 
         const getnote =()=>{
           store.dispatch('http/get',{
-                api:"/api/admin/contents/1/5"})
+                api:"/api/admin/notes/1/5"})
         .then((data)=>{
                 if(data.status){
                   this.data   = data.message                   

@@ -9,7 +9,7 @@ export default {
             id: null,
             account: null,
         },
-        setAntMobile: ""
+        defaultCategoryCreateColor: ""
     },
     mutations: {
         resetState(state) {
@@ -34,13 +34,6 @@ export default {
         setAntMobile(state, formState) {
             state.setAntMobile = formState
         },
-        initialiseStore(state) {
-			// Check if the ID exists
-			if(localStorage.getItem('store')) {
-				// Replace the state object with the stored item
-                state.user = JSON.parse(localStorage.getItem('store'));
-			}
-		}
     },
     actions: {
         register({ commit }, payLoad) {
