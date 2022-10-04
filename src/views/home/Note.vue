@@ -19,7 +19,8 @@ div(:span='18' style="margin:10px 20px;")
                     DownOutlined
                 template(#overlay)
                     NoteCategory(v-bind:categories="pCategories")
-            a-dropdown(:trigger="['click']" :placement='top' v-model:visible="exampleVisible")
+            //- trigger 控制移出區塊不會自動關閉區塊，visible 控制點擊區塊不要關閉
+            a-dropdown(:trigger="['click']" v-model:visible="exampleVisible") 
                 a.ant-dropdown-link(@click.prevent='' style="margin:10px 10px;")
                     | 記事範本
                     DownOutlined

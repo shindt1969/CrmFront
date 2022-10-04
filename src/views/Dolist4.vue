@@ -17,7 +17,6 @@ a-list(item-layout="horizontal", :data-source="datas")
 </template>
 
 
-
 <script>
 import { defineComponent, onMounted, ref } from "vue";
 import { storeKey, useStore } from "vuex";

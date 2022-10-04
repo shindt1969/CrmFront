@@ -6,7 +6,7 @@
         a-input-search(v-model:value='value' placeholder='搜尋記事類別' @search='onSearch')
 
     .categorylist
-        div(v-for="category in categories" :key="label.id")
+        div(v-for="category in categories" :key="category.id")
             a-checkbox(v-model:checked='category.checked' :disabled='disabled')
                 | {{ category.name }}
             br
@@ -14,7 +14,7 @@
     a-input-group(compact='')
         a-input(v-model:value='value19' placeholder='新增記事類別' style='width: calc(100% - 100px)')
         a-button(type='primary') 新增
-s
+
 </template>
         
 <script>
