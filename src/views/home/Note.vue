@@ -49,20 +49,31 @@ const get_today = () => {
 
 
 export default defineComponent({
+    props: {
+        'text': {
+            type: String,
+            default: ""
+        },
+        'default_date':{
+            type: String,
+            default: get_today()
+        }
+
+    },
     components: {
         ClockCircleOutlined,
         DownOutlined,
         UserOutlined,
         NoteCategory
     },
-    setup() {
+    setup(props, { attrs, slots, emit, expose }) {
         const activeKey = ref('1');
-        const datePickerFormat = 'YYYY-MM-DD';
-        const today = ref(dayjs(get_today(), datePickerFormat));
+        const today = ref(dayjs(props.default_date, 'YYYY-MM-DD'));
         const categoryVisible = ref(false);
         const exampleVisible = ref(false);
         const pCategories = ref([]);
         const store = useStore();
+        const isCallByDoList = ref(false);
 
         const categoryIds = computed(() => {
             var checkedCategories = pCategories.value.filter(category => category.checked);
@@ -75,7 +86,7 @@ export default defineComponent({
         });
 
         const storeBody = reactive({
-            text: "",
+            text: props.text,
             target_id: 1,
             target_type_id: activeKey,
             create_by_id: store.state.member.user.id,
@@ -105,6 +116,9 @@ export default defineComponent({
 
         const cancle = () => {
             storeBody.text = "";
+            if (isCallByDoList.value){
+                emit("update");
+            }
         };
 
         const getNoteCategories = () => {
